@@ -1,10 +1,15 @@
 import React, { useState } from "react";
-import "bootstrap-icons/font/bootstrap-icons.css"; // Import Bootstrap Icons
+import "bootstrap-icons/font/bootstrap-icons.css";
+import logo from '../assets/Daco_5715743.png'
 
 const Navbar = () => {
   const [query, setQuery] = useState(""); // Store the search query
   const [suggestions, setSuggestions] = useState([]); // Store the filtered suggestions
   const [isSearchOpen, setIsSearchOpen] = useState(false); // Track search bar visibility
+  const [isSignInModalOpen, setIsSignInModalOpen] = useState(false); // Track sign-in modal visibility
+  const [isUserModalOpen, setIsUserModalOpen] = useState(false); // Track user modal visibility
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false); // Track sidebar visibility
+  const [isMenuOpen, setIsMenuOpen] = useState(false); // Track mobile menu visibility
 
   // Sample list of products (this can be dynamic or fetched from an API)
   const products = [
@@ -20,7 +25,7 @@ const Navbar = () => {
     "Cameras"
   ];
 
-  // Function to handle the input change in the search bar
+  // Handle input change for the search bar
   const handleSearchChange = (event) => {
     const value = event.target.value;
     setQuery(value);
@@ -36,7 +41,7 @@ const Navbar = () => {
     }
   };
 
-  // Function to handle suggestion click
+  // Handle suggestion click
   const handleSuggestionClick = (suggestion) => {
     setQuery(suggestion); // Set the clicked suggestion as the query
     setSuggestions([]); // Clear suggestions after selection
@@ -45,13 +50,60 @@ const Navbar = () => {
   // Toggle the search bar visibility
   const toggleSearchBar = () => {
     setIsSearchOpen(!isSearchOpen);
+    // Close other modals when the search bar is toggled
+    setIsSignInModalOpen(false);
+    setIsUserModalOpen(false);
+    setIsSidebarOpen(false);
+    setIsMenuOpen(false);
+  };
+
+  // Toggle the sign-in modal visibility
+  const toggleSignInModal = () => {
+    setIsSignInModalOpen(!isSignInModalOpen);
+    // Close other modals when the sign-in modal is toggled
+    setIsSearchOpen(false);
+    setIsUserModalOpen(false);
+    setIsSidebarOpen(false);
+    setIsMenuOpen(false);
+  };
+
+  // Toggle the user modal visibility
+  const toggleUserModal = () => {
+    setIsUserModalOpen(!isUserModalOpen);
+    // Close other modals when the user modal is toggled
+    setIsSearchOpen(false);
+    setIsSignInModalOpen(false);
+    setIsSidebarOpen(false);
+    setIsMenuOpen(false);
+  };
+
+  // Toggle the sidebar visibility
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+    // Close other modals when the sidebar is toggled
+    setIsSearchOpen(false);
+    setIsSignInModalOpen(false);
+    setIsUserModalOpen(false);
+    setIsMenuOpen(false);
+  };
+
+  // Toggle the mobile menu visibility
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+    // Close other modals when the mobile menu is toggled
+    setIsSearchOpen(false);
+    setIsSignInModalOpen(false);
+    setIsUserModalOpen(false);
+    setIsSidebarOpen(false);
   };
 
   return (
-    <nav className="bg-[#005F3A] text-[#F1E7D1] shadow-lg sticky top-0 z-50">
+    <nav className="bg-[#fff] text-[#000] shadow-lg sticky top-0 z-50">
       <div className="container mx-auto flex justify-between items-center py-4 px-6 relative">
         {/* Logo */}
-        <div className="text-3xl font-extrabold text-[#F1E7D1]">ValoDeal</div>
+        <div className="text-3xl font-extrabold text-[#F1E7D1]">
+            
+            <img src={logo} className="w-32 mr-5" alt="" /></div>
 
         {/* Search Bar (Hidden on mobile, visible on larger screens) */}
         <div className="flex-grow mx-4 relative hidden lg:block">
@@ -59,11 +111,11 @@ const Navbar = () => {
             type="text"
             placeholder="Search products..."
             value={query}
-            onChange={handleSearchChange} // Update query on input change
-            className="w-full p-3 rounded-lg bg-[#F1E7D1] text-[#005F3A] focus:outline-none focus:ring-2 focus:ring-[#E03D2C]"
+            onChange={handleSearchChange}
+            className="w-full p-3 rounded-lg bg-[] border text-[#000] focus:outline-none focus:ring-2 focus:ring-[#008ecc]"
           />
-          <button className="absolute right-3 top-3 text-[#005F3A]">
-            <i className="bi bi-search text-xl"></i> {/* Bootstrap Icon for Search */}
+          <button className="absolute right-3 top-3 text-[#000]">
+            <i className="bi bi-search text-xl"></i>
           </button>
 
           {/* Suggestions Dropdown */}
@@ -73,7 +125,7 @@ const Navbar = () => {
                 {suggestions.map((suggestion, index) => (
                   <li
                     key={index}
-                    className="p-2 cursor-pointer text-black hover:bg-[#E03D2C] hover:text-white"
+                    className="p-2 cursor-pointer text-black hover:bg-[#008ecc] hover:text-white"
                     onClick={() => handleSuggestionClick(suggestion)}
                   >
                     {suggestion}
@@ -89,44 +141,47 @@ const Navbar = () => {
           {/* Mobile Search Icon */}
           <button
             onClick={toggleSearchBar}
-            className="lg:hidden text-2xl text-[#F1E7D1] hover:text-[#E03D2C]"
+            className="lg:hidden text-2xl text-[#000] hover:text-[#008ecc]"
           >
-            <i className="bi bi-search"></i> {/* Bootstrap Icon for Search (Mobile) */}
+            <i className="bi bi-search"></i>
           </button>
 
           {/* User Icon */}
-          <button className="hover:text-[#E03D2C]">
-            <i className="bi bi-person text-2xl"></i> {/* Bootstrap Icon for User */}
+          <button onClick={toggleUserModal} className="hover:text-[#008ecc]">
+            <i className="bi bi-person text-2xl"></i>
           </button>
 
           {/* Cart Icon */}
-          <button className="hover:text-[#E03D2C] relative">
-            <i className="bi bi-cart text-2xl"></i> {/* Bootstrap Icon for Cart */}
-            <span className="absolute top-0 right-0 bg-[#E03D2C] text-white text-xs rounded-full px-1">3</span>
+          <button onClick={toggleSidebar} className="hover:text-[#008ecc] relative">
+            <i className="bi bi-cart text-2xl"></i>
+            <span className="absolute top-0 right-0 bg-[#008ecc] text-white text-xs rounded-full px-1">3</span>
           </button>
 
           {/* Sign In Button */}
-          <button className="bg-[#E03D2C] text-[#F1E7D1] hover:bg-[#c93322] px-4 py-2 rounded-lg hidden md:block">
+          <button
+            onClick={toggleSignInModal}
+            className="bg-[#008ecc] text-[#fff] hover:bg-[#008ecc] px-4 py-2 rounded-lg hidden md:block"
+          >
             Sign In
           </button>
         </div>
 
         {/* Mobile Menu Button */}
         <div className="lg:hidden flex items-center">
-          <button>
-            <i className="bi bi-list text-3xl"></i> {/* Hamburger Menu Icon */}
+          <button onClick={toggleMenu}>
+            <i className="bi bi-list text-3xl"></i>
           </button>
         </div>
       </div>
 
-      {/* Mobile Search Bar (Appears with smooth transition) */}
+      {/* Mobile Search Bar */}
       {isSearchOpen && (
         <div
-          className="fixed top-0 left-0 right-0 bg-[#005F3A] text-[#F1E7D1] z-50 p-4 transition-all duration-500 ease-in-out"
+          className="fixed top-0 left-0 right-0 bg-[#fff] shadow-md text-[#000] z-50 p-4 transition-all duration-500 ease-in-out"
           style={{
             transform: isSearchOpen ? "translateY(0)" : "translateY(-100%)",
             position: "absolute",
-            top: "50px",
+            top: "60px",
             left: "0",
             right: "0",
             zIndex: 50,
@@ -140,10 +195,16 @@ const Navbar = () => {
               placeholder="Search products..."
               value={query}
               onChange={handleSearchChange}
-              className="w-full p-3 rounded-lg bg-[#F1E7D1] text-[#005F3A] focus:outline-none focus:ring-2 focus:ring-[#E03D2C]"
+              className="w-full p-3 rounded-lg bg-[#ddd] text-[#000] focus:outline-none focus:ring-2 focus:ring-[#008ecc]"
             />
-            <button className="absolute right-3 top-3 text-[#005F3A]">
-              <i className="bi bi-search text-xl"></i> {/* Bootstrap Icon for Search */}
+            <button className="absolute right-14 top-3 text-[#000]">
+              <i className="bi bi-search text-xl"></i>
+            </button>
+            <button
+              className="absolute right-0 text-[#fff]"
+              onClick={toggleSearchBar}
+            >
+              <i className="bi bi-x text-4xl absolute top-0 right-0 bg-[#008ecc] pb-2 rounded-r-lg"></i>
             </button>
           </div>
           {/* Suggestions Dropdown for mobile */}
@@ -153,7 +214,7 @@ const Navbar = () => {
                 {suggestions.map((suggestion, index) => (
                   <li
                     key={index}
-                    className="p-2 cursor-pointer text-black hover:bg-[#E03D2C] hover:text-white"
+                    className="p-2 cursor-pointer text-black hover:bg-[#008ecc] hover:text-white"
                     onClick={() => handleSuggestionClick(suggestion)}
                   >
                     {suggestion}
@@ -162,6 +223,141 @@ const Navbar = () => {
               </ul>
             </div>
           )}
+        </div>
+      )}
+
+      {/* Sign In Modal */}
+      {isSignInModalOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+          <div className="bg-white p-6 rounded-lg w-96 transform transition-transform duration-500 ease-in-out"
+            style={{ transform: isSignInModalOpen ? "translateY(0)" : "translateY(-100%)" }}
+          >
+            {/* Close Modal Icon */}
+            <button
+              className="absolute top-3 right-3 text-gray-600 hover:text-gray-900"
+              onClick={toggleSignInModal}
+            >
+              <i className="bi bi-x-lg text-2xl"></i>
+            </button>
+            <h2 className="text-2xl font-semibold mb-4 text-center ">Sign In</h2>
+            <form>
+              <div className="mb-4">
+                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
+                  Email
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  placeholder="Enter your email"
+                  className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
+                  Password
+                </label>
+                <input
+                  type="password"
+                  id="password"
+                  placeholder="Enter your password"
+                  className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+              <button
+                type="submit"
+                className="w-full bg-[#008ecc] text-white p-3 rounded-lg hover:bg-[#008fccb7]"
+              >
+                Sign In
+              </button>
+            </form>
+
+            {/* Google Sign In Button */}
+            <button
+              className="w-full bg-[#4285F4] text-white p-3 rounded-lg mt-4 flex items-center justify-center"
+            >
+              <i className="bi bi-google text-white text-lg mr-2"></i>
+              Continue with Google
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* User Modal */}
+      {isUserModalOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+          <div className="bg-white p-6 rounded-lg w-96">
+            <button
+              className="absolute top-3 right-3 text-gray-600 hover:text-gray-900"
+              onClick={toggleUserModal}
+            >
+              <i className="bi bi-x-lg text-2xl"></i>
+            </button>
+            <h2 className="text-2xl font-semibold mb-4 text-center">User Profile</h2>
+            {/* User Info (Placeholder) */}
+            <p className="text-lg">Name: John Doe</p>
+            <p className="text-lg">Email: johndoe@example.com</p>
+            <button
+              className="w-full bg-[#E03D2C] text-white p-3 rounded-lg mt-4 hover:bg-[#c93322]"
+              onClick={toggleUserModal}
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Sidebar for Cart */}
+      {isSidebarOpen && (
+        <div
+          className="fixed top-0 right-0 bg-[#fff] w-64 h-full z-50 shadow-lg transform transition-transform duration-300"
+          style={{
+            transform: isSidebarOpen ? "translateX(0)" : "translateX(100%)"
+          }}
+        >
+          <div className="flex justify-end p-4">
+            <button onClick={toggleSidebar} className="text-xl">
+              <i className="bi bi-x"></i>
+            </button>
+          </div>
+          <div className="p-4">
+            <h2 className="text-2xl font-semibold">Cart</h2>
+            {/* Add Cart items here */}
+            <ul>
+              <li className="py-2">Product 1</li>
+              <li className="py-2">Product 2</li>
+              <li className="py-2">Product 3</li>
+            </ul>
+          </div>
+        </div>
+      )}
+
+      {/* Mobile Menu */}
+      {isMenuOpen && (
+        <div
+          className="fixed top-0 right-0 w-64 h-full bg-[#fff] text-[#000] z-50 shadow-lg transform transition-transform duration-300"
+          style={{
+            transform: isMenuOpen ? "translateX(0)" : "translateX(100%)"
+          }}
+        >
+          <div className="flex justify-end p-4">
+            <button onClick={toggleMenu} className="text-xl">
+              <i className="bi bi-x"></i>
+            </button>
+          </div>
+          <ul className="px-4 py-4">
+            <li className="p-2 text-xl hover:bg-[#008ecc] hover:text-white">
+              <a href="/">Home</a>
+            </li>
+            <li className="p-2 text-xl hover:bg-[#008ecc] hover:text-white">
+              <a href="/products">Products</a>
+            </li>
+            <li className="p-2 text-xl hover:bg-[#008ecc] hover:text-white">
+              <a href="/about">About</a>
+            </li>
+            <li className="p-2 text-xl hover:bg-[#008ecc] hover:text-white">
+              <a href="/contact">Contact</a>
+            </li>
+          </ul>
         </div>
       )}
     </nav>
