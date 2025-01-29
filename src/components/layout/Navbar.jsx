@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "bootstrap-icons/font/bootstrap-icons.css";
-import logo from '../assets/Daco_5715743.png'
+import logo from '../../assets/Daco_5715743.png'
 
 const Navbar = () => {
   const [query, setQuery] = useState(""); // Store the search query
@@ -98,7 +98,17 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-[#fff] text-[#000] shadow-lg sticky top-0 z-50">
+    <nav className="bg-[#fff] text-[#000] shadow-sm sticky top-0 z-50">
+      <div className="bg-[#008ecc] py-1 text-center text-white">
+      আমাদের যে কোন পণ্য অর্ডার করতে কল বা WhatsApp করুন:  
+      <a href="https://wa.me/8801712345678?text=Hello%20ValoDeal%2C%20I%20want%20to%20know%20more%20about%20your%20products" target="_blank" className="mx-2">
+      +8801321208940
+      </a>
+       | হট লাইন:  
+      <a href="tel:+8801234567890" class=" underline ml-2">
+      09642-922922
+      </a>
+      </div>
       <div className="container mx-auto flex justify-between items-center py-4 px-6 relative">
         {/* Logo */}
         <div className="text-3xl font-extrabold text-[#F1E7D1]">
@@ -106,13 +116,13 @@ const Navbar = () => {
             <img src={logo} className="w-32 mr-5" alt="" /></div>
 
         {/* Search Bar (Hidden on mobile, visible on larger screens) */}
-        <div className="flex-grow mx-4 relative hidden lg:block">
+        <div className="w-2/5 mx-4 relative hidden lg:block">
           <input
             type="text"
             placeholder="Search products..."
             value={query}
             onChange={handleSearchChange}
-            className="w-full p-3 rounded-lg bg-[] border text-[#000] focus:outline-none focus:ring-2 focus:ring-[#008ecc]"
+            className="w-full p-3 rounded-lg bg-[] border border-[#008ecc] text-[#000] focus:outline-none focus:ring-2 focus:ring-[#008ecc]"
           />
           <button className="absolute right-3 top-3 text-[#000]">
             <i className="bi bi-search text-xl"></i>
