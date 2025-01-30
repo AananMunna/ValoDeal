@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import logo from '../../assets/Daco_5715743.png'
 
@@ -99,13 +99,13 @@ const Navbar = () => {
 
   return (
     <nav className="bg-[#fff] text-[#000] shadow-sm sticky top-0 z-50">
-      <div className="bg-[#008ecc] py-1 text-center text-white">
+      <div className="bg-[#008ecc] p-2 text-center text-white text-xs md:text-base">
       আমাদের যে কোন পণ্য অর্ডার করতে কল বা WhatsApp করুন:  
       <a href="https://wa.me/8801712345678?text=Hello%20ValoDeal%2C%20I%20want%20to%20know%20more%20about%20your%20products" target="_blank" className="mx-2">
       +8801321208940
       </a>
        | হট লাইন:  
-      <a href="tel:+8801234567890" class=" underline ml-2">
+      <a href="tel:+8801234567890" className=" underline ml-2">
       09642-922922
       </a>
       </div>
@@ -157,7 +157,7 @@ const Navbar = () => {
           </button>
 
           {/* User Icon */}
-          <button onClick={toggleUserModal} className="hover:text-[#008ecc]">
+          <button onClick={toggleSignInModal} className="hover:text-[#008ecc]">
             <i className="bi bi-person text-2xl"></i>
           </button>
 
