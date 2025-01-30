@@ -1,38 +1,37 @@
-import React from 'react'
+import React, { useState, useEffect } from "react";
 
 const Hero = () => {
-  return (
-    <>
-    <div className="carousel w-full md:h-screen mt-">
-  <div id="item1" className="carousel-item w-full ">
-    <img
-      src="https://ghorerbazar.com/cdn/shop/files/Web_Banner_Crystal_Honey.png?v=1736946452&width=1500"
-      className="w-full" />
-  </div>
-  <div id="item2" className="carousel-item w-full">
-    <img
-      src="https://img.daisyui.com/images/stock/photo-1609621838510-5ad474b7d25d.webp"
-      className="w-full" />
-  </div>
-  <div id="item3" className="carousel-item w-full">
-    <img
-      src="https://img.daisyui.com/images/stock/photo-1414694762283-acccc27bca85.webp"
-      className="w-full" />
-  </div>
-  <div id="item4" className="carousel-item w-full">
-    <img
-      src="https://img.daisyui.com/images/stock/photo-1665553365602-b2fb8e5d1707.webp"
-      className="w-full" />
-  </div>
-</div>
-{/* <div className="flex w-full justify-center gap-2 py-2">
-  <a href="#item1" className="btn btn-xs"></a>
-  <a href="#item2" className="btn btn-xs">2</a>
-  <a href="#item3" className="btn btn-xs">3</a>
-  <a href="#item4" className="btn btn-xs">4</a>
-</div> */}
-    </>
-  )
-}
+  // State to manage current slide
+  const [currentIndex, setCurrentIndex] = useState(0);
 
-export default Hero
+  // List of carousel images
+  const carouselImages = [
+    "https://images.othoba.com/images/thumbs/0718474_Grocery-Combo-Website.jpeg",
+    // "https://ghorerbazar.com/cdn/shop/files/Web_Banner_Crystal_Honey.png?v=1736946452&width=1500",
+    // "https://scontent.fird1-1.fna.fbcdn.net/v/t39.30808-6/311478319_807478854007765_5716341093143722862_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=cc71e4&_nc_eui2=AeEr-lDCb7mcneAxxW79RlC-KTzMkQgGQ78pPMyRCAZDvzH-yU4ujYJxins6Vnz0qywbnLizS4lOEPumik63Vuir&_nc_ohc=r4XfrjXfu2YQ7kNvgELDbVT&_nc_zt=23&_nc_ht=scontent.fird1-1.fna&_nc_gid=AEk8uKyPvkPLXFp0OZzlJPR&oh=00_AYB21VOxLCqQOXF7nZqIweJzGS_dIMTzg0oqpKKRZYmzRg&oe=67A1037B"
+  ];
+
+  // Auto-slide effect
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % carouselImages.length);
+    }, 3000); // Change slide every 3 seconds
+
+    return () => clearInterval(interval); // Clean up on unmount
+  }, []);
+
+  return (
+    <div className="carousel w-full">
+      {carouselImages.map((image, index) => (
+        <div
+          key={index}
+          className={`carousel-item w-full ${index === currentIndex ? "block" : "hidden"}`}
+        >
+          <img src={image} alt={`Slide ${index + 1}`} className="w-full" />
+        </div>
+      ))}
+    </div>
+  );
+};
+
+export default Hero;

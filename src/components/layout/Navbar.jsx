@@ -1,6 +1,7 @@
 import  { useState } from "react";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import logo from '../../assets/Daco_5715743.png'
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [query, setQuery] = useState(""); // Store the search query
@@ -67,26 +68,6 @@ const Navbar = () => {
     setIsMenuOpen(false);
   };
 
-  // Toggle the user modal visibility
-  const toggleUserModal = () => {
-    setIsUserModalOpen(!isUserModalOpen);
-    // Close other modals when the user modal is toggled
-    setIsSearchOpen(false);
-    setIsSignInModalOpen(false);
-    setIsSidebarOpen(false);
-    setIsMenuOpen(false);
-  };
-
-  // Toggle the sidebar visibility
-  const toggleSidebar = () => {
-    setIsSidebarOpen(!isSidebarOpen);
-    // Close other modals when the sidebar is toggled
-    setIsSearchOpen(false);
-    setIsSignInModalOpen(false);
-    setIsUserModalOpen(false);
-    setIsMenuOpen(false);
-  };
-
   // Toggle the mobile menu visibility
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -112,9 +93,10 @@ const Navbar = () => {
       <div className="container mx-auto flex justify-between items-center py-4 px-6 relative">
         {/* Logo */}
         <div className="text-3xl font-extrabold text-[#F1E7D1]">
-            
-            <img src={logo} className="w-32 mr-5" alt="" /></div>
-
+            <Link to='/'>
+            <img src={logo} className="w-32 mr-5" alt="" />
+            </Link>
+            </div>
         {/* Search Bar (Hidden on mobile, visible on larger screens) */}
         <div className="w-2/5 mx-4 relative hidden lg:block">
           <input
@@ -157,15 +139,17 @@ const Navbar = () => {
           </button>
 
           {/* User Icon */}
-          <button onClick={toggleSignInModal} className="hover:text-[#008ecc]">
+          <button onClick={toggleSignInModal} className="hover:text-[#008ecc] md:hidden">
             <i className="bi bi-person text-2xl"></i>
           </button>
 
           {/* Cart Icon */}
-          <button onClick={toggleSidebar} className="hover:text-[#008ecc] relative">
+          <Link to='/cart'>
+          <button className="hover:text-[#008ecc] relative">
             <i className="bi bi-cart text-2xl"></i>
             <span className="absolute top-0 right-0 bg-[#008ecc] text-white text-xs rounded-full px-1">3</span>
           </button>
+          </Link>
 
           {/* Sign In Button */}
           <button

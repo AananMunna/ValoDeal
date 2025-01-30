@@ -1,20 +1,22 @@
 
 import './App.css'
-import Hero from './components/hero/Hero'
-import Footer from './components/layout/Footer'
-import Navbar from './components/layout/Navbar'
-import ProductCollectionPage from './components/productPage/productCollections'
-import ProductPage from './components/productPage/ProductPage'
+import CartPage from './components/cartPage/CartPage'
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Home from './components/Home';
 
 function App() {
 
   return (
     <>
-    <Navbar />
-    <Hero />.
-    <ProductPage />
-    <ProductCollectionPage />
-    <Footer />
+    <Router>
+      <div>
+        {/* Define Routes */}
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/cart" element={<CartPage />} />
+        </Routes>
+      </div>
+    </Router>
     </>
   )
 }

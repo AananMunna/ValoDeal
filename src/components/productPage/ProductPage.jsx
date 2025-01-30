@@ -73,7 +73,7 @@ const ProductCard = ({ product }) => {
       />
       <h2 className="text-lg font-semibold mb-2 truncate">{product.name}</h2> {/* Apply truncate here */}
       <p className="text-md font-bold text-gray-800 mb-3">{product.price}</p>
-      <button className="w-full bg-[#008ecc] text-white py-2 rounded-lg hover:bg-[#006fab]">
+      <button className="w-full bg-[#008ecc] text-white py-2 rounded-lg hover:bg-[#006fab]" onClick={() => addToCart(product)}>
         Add to Cart
       </button>
     </div>
@@ -84,7 +84,7 @@ const ProductPage = () => {
   const [products, setProducts] = useState(productsData);
 
   return (
-    <div className="container mx-auto py-10">
+    <div className="container mx-auto pb-10 mt-10">
       <h1 className="text-3xl font-bold text-center mb-8">All Products</h1>
       <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 gap-6">
         {products.map((product) => (
