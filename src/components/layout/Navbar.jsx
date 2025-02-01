@@ -282,7 +282,6 @@ const Navbar = () => {
           <div className="bg-white p-6 rounded-lg w-96">
             <button
               className="absolute top-3 right-3 text-gray-600 hover:text-gray-900"
-              onClick={toggleUserModal}
             >
               <i className="bi bi-x-lg text-2xl"></i>
             </button>
@@ -292,7 +291,6 @@ const Navbar = () => {
             <p className="text-lg">Email: johndoe@example.com</p>
             <button
               className="w-full bg-[#E03D2C] text-white p-3 rounded-lg mt-4 hover:bg-[#c93322]"
-              onClick={toggleUserModal}
             >
               Close
             </button>
@@ -309,7 +307,7 @@ const Navbar = () => {
           }}
         >
           <div className="flex justify-end p-4">
-            <button onClick={toggleSidebar} className="text-xl">
+            <button className="text-xl">
               <i className="bi bi-x"></i>
             </button>
           </div>

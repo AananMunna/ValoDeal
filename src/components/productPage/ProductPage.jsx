@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from 'react-router-dom';
 
 const productsData = [
   {
@@ -65,7 +66,7 @@ const productsData = [
 
 const ProductCard = ({ product }) => {
   return (
-    <div className="bg-white p-4 rounded-2xl shadow-md hover:shadow-lg transition-shadow">
+    <Link to='/filter' className="bg-white p-4 rounded-2xl shadow-md hover:shadow-lg transition-shadow">
       <img
         src={product.imageUrl}
         alt={product.name}
@@ -73,10 +74,12 @@ const ProductCard = ({ product }) => {
       />
       <h2 className="text-lg font-semibold mb-2 truncate">{product.name}</h2> {/* Apply truncate here */}
       <p className="text-md font-bold text-gray-800 mb-3">{product.price}</p>
-      <button className="w-full bg-[#008ecc] text-white py-2 rounded-lg hover:bg-[#006fab]" onClick={() => addToCart(product)}>
+      <Link to='/cart'>
+      <button className="w-full bg-[#008ecc] text-white py-2 rounded-lg hover:bg-[#006fab]">
         Add to Cart
       </button>
-    </div>
+      </Link>
+    </Link>
   );
 };
 

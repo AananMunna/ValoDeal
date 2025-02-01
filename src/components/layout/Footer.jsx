@@ -7,13 +7,13 @@ const Footer = () => {
         {/* Ghorer Bazar Description */}
         <div className="mb-6">
           <h2 className="text-2xl font-semibold mb-4">
-            Ghorer Bazar: Your Trusted Source for Safe & Organic Food
+            ShopClues: Your Trusted Source for Safe & Organic Food
           </h2>
           <p className="text-sm">
-            Ghorer Bazar is a leading e-commerce platform committed to delivering safe, healthy, and organic food products across Bangladesh. Renowned for its dedication to quality, Ghorer Bazar offers a diverse range of health-focused items, including premium mustard oil, pure ghee, organic honey, dates, chia seeds, and an assortment of nuts. Each product is carefully sourced and crafted to ensure maximum health benefits, meeting the highest standards of purity and freshness.
+          ShopClues is a leading e-commerce platform committed to delivering safe, healthy, and organic food products across Bangladesh. Renowned for its dedication to quality, ShopClues offers a diverse range of health-focused items, including premium mustard oil, pure ghee, organic honey, dates, chia seeds, and an assortment of nuts. Each product is carefully sourced and crafted to ensure maximum health benefits, meeting the highest standards of purity and freshness.
           </p>
           <p className="text-sm mt-2">
-            With a focus on convenience, Ghorer Bazar operates primarily online, bringing the goodness of nature straight to your doorstep. Whether you're seeking to elevate your wellness journey or simply enjoy natural, wholesome foods, Ghorer Bazar is your go-to destination for authentic, trustworthy products.
+            With a focus on convenience, ShopClues operates primarily online, bringing the goodness of nature straight to your doorstep. Whether you're seeking to elevate your wellness journey or simply enjoy natural, wholesome foods, ShopClues is your go-to destination for authentic, trustworthy products.
           </p>
         </div>
 
@@ -39,7 +39,7 @@ const Footer = () => {
 
         {/* Copyright */}
         <div className="border-t border-gray-700 pt-6 mt-6 text-center text-sm text-gray-400">
-          <p>&copy; ঘরের বাজার 2024</p>
+          <p>&copy; ShopClues 2024</p>
         </div>
       </div>
     </footer>
