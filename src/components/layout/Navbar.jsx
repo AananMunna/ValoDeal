@@ -125,7 +125,7 @@ const Navbar = () => {
         {/* Logo */}
         <div className="text-3xl font-extrabold text-[#F1E7D1]">
             <Link to='/'>
-            <img src={logo} className="w-32 mr-5" alt="" />
+            <img src={logo} className="w-28 mr-5" alt="" />
             </Link>
             </div>
         {/* Search Bar (Hidden on mobile, visible on larger screens) */}
@@ -160,7 +160,7 @@ const Navbar = () => {
         </div>
 
         {/* User Actions and Search Icon (Visible on mobile) */}
-        <div className="flex items-center space-x-6">
+        <div className="flex items-center space-x-3">
           {/* Mobile Search Icon */}
           <button
             onClick={toggleSearchBar}
@@ -185,7 +185,7 @@ const Navbar = () => {
           <div className="relative inline-block text-left">
       <button
         onClick={toggleDropdown}
-        className="border rounded px-1 py-1 text-[8px] w-12 md:w-28 h-7 justify-center items-center mt-1 flex md:btn bg-transparent text-gray-700 hover:text-black focus:outline-none"
+        className="border rounded px-1 py-1 text-xs w-16 md:w-28 h-7 justify-center items-center mt-1 flex md:btn bg-transparent text-gray-700 hover:text-black focus:outline-none"
       >
         <span>{selectedLanguage}</span>
         <i className="bi bi-chevron-down"></i>
