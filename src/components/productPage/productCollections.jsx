@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 // Example product collections with categories
 const productCollections = [
@@ -20,7 +21,7 @@ const productCollections = [
     ],
   },
   {
-    category: "HONEY (মধু)",
+    category: "HONEY",
     products: [
       {
         id: 3,
@@ -37,11 +38,11 @@ const productCollections = [
     ],
   },
   {
-    category: "Ghee (ঘি)",
+    category: "Ghee",
     products: [
       {
         id: 5,
-        name: "Gawa Ghee/গাওয়া ঘি",
+        name: "Gawa Ghee",
         price: "Tk 900.00",
         imageUrl: "https://ghorerbazar.com/cdn/shop/files/ghee-500gm.jpg?v=1710231379&width=360",
       },
@@ -54,7 +55,7 @@ const productCollections = [
     ],
   },
   {
-    category: "Dates (খেজুর)",
+    category: "Dates",
     products: [
       {
         id: 7,
@@ -71,7 +72,7 @@ const productCollections = [
     ],
   },
   {
-    category: "Tea/Snacks (চা-নাশতা)",
+    category: "Tea/Snacks",
     products: [
       {
         id: 9,
@@ -90,29 +91,38 @@ const productCollections = [
 ];
 
 const ProductCard = ({ product }) => {
+  const { t } = useTranslation();
   return (
     <div className="bg-white p-4 rounded-xl shadow-lg transition-all transform hover:scale-105 hover:shadow-2xl duration-300">
       <div className="relative mb-4">
         <img
           src={product.imageUrl}
-          alt={product.name}
+          alt={t(`products.${product.name}`)}
           className="w-full h-48 object-cover rounded-xl shadow-sm mb-4"
         />
       </div>
-      <h2 className="text-lg font-semibold text-gray-800 mb-2 truncate">{product.name}</h2>
+      <h2 className="text-lg font-semibold text-gray-800 mb-2 truncate">
+        {t(`products.${product.name}`)}
+      </h2>
     </div>
   );
 };
 
 const ProductCollectionPage = () => {
   const [selectedCategory, setSelectedCategory] = useState("Organic Oil");
+  const { t, i18n } = useTranslation();
   const selectedCollection = productCollections.find(
     (collection) => collection.category === selectedCategory
   );
 
+
   return (
     <div className="container mx-auto py-10 px-4">
-      <h1 className="text-3xl font-bold text-center mb-8">Product Collections</h1>
+      {/* Language Toggle Buttons */}
+
+      <h1 className="text-3xl font-bold text-center mb-8">
+        {t("productCollections")}
+      </h1>
 
       {/* Category Selector */}
       <div className="flex flex-wrap justify-center space-x-4 mb-6">
@@ -126,7 +136,7 @@ const ProductCollectionPage = () => {
             } transition-colors duration-200`}
             onClick={() => setSelectedCategory(collection.category)}
           >
-            {collection.category}
+            {t(`categories.${collection.category}`)}
           </button>
         ))}
       </div>

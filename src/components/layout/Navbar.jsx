@@ -95,6 +95,7 @@ const Navbar = () => {
     setSelectedLanguage(language);
     setIsOpen(false); // Close the dropdown after selection
     // You can add language change logic here, like setting the app's language
+    changeLanguage()
 
     if (language == 'English') {
       changeLanguage('en')
@@ -110,6 +111,7 @@ const Navbar = () => {
   };
 
   return (
+    <>
     <nav className="bg-[#fff] text-[#000] shadow-sm sticky top-0 z-50">
       <div className="bg-[#008ecc] p-2 text-center text-white text-xs md:text-base">
       {t('headerText1')}:  
@@ -132,7 +134,7 @@ const Navbar = () => {
         <div className="w-2/5 mx-4 relative hidden lg:block">
           <input
             type="text"
-            placeholder="Search products..."
+            placeholder={t('searchPlaceholder')}
             value={query}
             onChange={handleSearchChange}
             className="w-full p-3 rounded-lg bg-[] border border-[#008ecc] text-[#000] focus:outline-none focus:ring-2 focus:ring-[#008ecc]"
@@ -221,7 +223,7 @@ const Navbar = () => {
             onClick={toggleSignInModal}
             className="bg-[#008ecc] text-[#fff] hover:bg-[#008ecc] px-4 py-2 rounded-lg hidden md:block btn"
           >
-            Sign In
+            {t('signIn')}
           </button>
         </div>
 
@@ -418,6 +420,7 @@ const Navbar = () => {
         </div>
       )}
     </nav>
+    </>
   );
 };
 
