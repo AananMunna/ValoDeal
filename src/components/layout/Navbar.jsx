@@ -3,7 +3,12 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import logo from '../../assets/Daco_5715743.png'
 import { Link } from "react-router-dom";
 
+import { useTranslation } from 'react-i18next';
+
 const Navbar = () => {
+
+  const { t } = useTranslation();
+
   const [query, setQuery] = useState(""); // Store the search query
   const [suggestions, setSuggestions] = useState([]); // Store the filtered suggestions
   const [isSearchOpen, setIsSearchOpen] = useState(false); // Track search bar visibility
@@ -78,14 +83,40 @@ const Navbar = () => {
     setIsSidebarOpen(false);
   };
 
+
+  const [selectedLanguage, setSelectedLanguage] = useState('English');
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const changeLanguageF = (language) => {
+    setSelectedLanguage(language);
+    setIsOpen(false); // Close the dropdown after selection
+    // You can add language change logic here, like setting the app's language
+
+    if (language == 'English') {
+      changeLanguage('en')
+    }else{
+      changeLanguage('bn')
+    }
+    
+  };
+  const { i18n } = useTranslation();
+
+  const changeLanguage = (lang) => {
+    i18n.changeLanguage(lang);
+  };
+
   return (
     <nav className="bg-[#fff] text-[#000] shadow-sm sticky top-0 z-50">
       <div className="bg-[#008ecc] p-2 text-center text-white text-xs md:text-base">
-      আমাদের যে কোন পণ্য অর্ডার করতে কল বা WhatsApp করুন:  
+      {t('headerText1')}:  
       <a href="https://wa.me/8801712345678?text=Hello%20ValoDeal%2C%20I%20want%20to%20know%20more%20about%20your%20products" target="_blank" className="mx-2">
       +8801321208940
       </a>
-       | হট লাইন:  
+       | {t('headerHotline')}:  
       <a href="tel:+8801234567890" className=" underline ml-2">
       09642-922922
       </a>
@@ -139,7 +170,7 @@ const Navbar = () => {
           </button>
 
           {/* User Icon */}
-          <button onClick={toggleSignInModal} className="hover:text-[#008ecc] md:hidden">
+          <button onClick={toggleSignInModal} className="hover:text-[#008ecc] hidden">
             <i className="bi bi-person text-2xl"></i>
           </button>
 
@@ -150,11 +181,45 @@ const Navbar = () => {
             <span className="absolute top-0 right-0 bg-[#008ecc] text-white text-xs rounded-full px-1">3</span>
           </button>
           </Link>
+          {/* language select option */}
+          <div className="relative inline-block text-left">
+      <button
+        onClick={toggleDropdown}
+        className="border rounded px-1 py-1 text-[8px] w-12 md:w-28 h-7 justify-center items-center mt-1 flex md:btn bg-transparent text-gray-700 hover:text-black focus:outline-none"
+      >
+        <span>{selectedLanguage}</span>
+        <i className="bi bi-chevron-down"></i>
+      </button>
+
+      {isOpen && (
+        <ul
+          className="absolute right-0 mt-2 w-32 py-2 bg-white shadow-lg rounded-lg border border-gray-300"
+        >
+          <li>
+            <a
+              
+              onClick={() => changeLanguageF('English')}
+              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
+            >
+              English
+            </a>
+          </li>
+          <li>
+            <a
+              onClick={() => changeLanguageF('বাংলা')}
+              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
+            >
+              বাংলা
+            </a>
+          </li>
+        </ul>
+      )}
+    </div>
 
           {/* Sign In Button */}
           <button
             onClick={toggleSignInModal}
-            className="bg-[#008ecc] text-[#fff] hover:bg-[#008ecc] px-4 py-2 rounded-lg hidden md:block"
+            className="bg-[#008ecc] text-[#fff] hover:bg-[#008ecc] px-4 py-2 rounded-lg hidden md:block btn"
           >
             Sign In
           </button>
