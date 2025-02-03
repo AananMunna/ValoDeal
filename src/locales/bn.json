@@ -3,7 +3,12 @@
     "text1": "আমাদের পণ্য অর্ডার করতে কল বা হোয়াটসঅ্যাপ করুন",
     "hotline": "হটলাইন",
     "signIn": "সাইন ইন",
-    "searchPlaceholder": "পণ্য অনুসন্ধান করুন"
+    "searchPlaceholder": "পণ্য অনুসন্ধান করুন",
+    "email": "ইমেইল",
+    "emailPlaceholder": "আপনার ইমেইল লিখুন",
+    "password": "পাসওয়ার্ড",
+    "passwordPlaceholder": "আপনার পাসওয়ার্ড লিখুন",
+    "google": "Google এর সাথে চালিয়ে যান"
   },
 
   "cart": {

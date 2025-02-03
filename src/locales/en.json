@@ -3,7 +3,12 @@
     "text1": "Call or WhatsApp to order any of our products",
     "hotline": "Hot Line",
     "signIn": "Sign In",
-    "searchPlaceholder": "Search Products"
+    "searchPlaceholder": "Search Products",
+    "email": "Email",
+    "emailPlaceholder": "Enter your email",
+    "password": "Password",
+    "passwordPlaceholder": "Enter your password",
+    "google": "Continue with Google"
   },
 
   "cart": {

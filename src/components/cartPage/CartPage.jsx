@@ -7,7 +7,7 @@ import Footer from "../layout/Footer";
 const sampleProducts = [
   {
     id: 1,
-    name: { en: "Pure Mustard Oil", bn: "বিশুদ্ধ সরিষার তেল" },
+    name: { en: "Mustard Oil", bn: "সরিষার তেল" },
     price: 800.0,
     imageUrl: "https://ghorerbazar.com/cdn/shop/products/Olive-oil.jpg?v=1707771596&width=360",
   },

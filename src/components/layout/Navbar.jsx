@@ -300,27 +300,27 @@ const Navbar = () => {
             >
               <i className="bi bi-x-lg text-2xl"></i>
             </button>
-            <h2 className="text-2xl font-semibold mb-4 text-center ">Sign In</h2>
+            <h2 className="text-2xl font-semibold mb-4 text-center ">{t("header.signIn")}</h2>
             <form>
               <div className="mb-4">
                 <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
-                  Email
+                {t("header.email")}
                 </label>
                 <input
                   type="email"
                   id="email"
-                  placeholder="Enter your email"
+                  placeholder={t("header.emailPlaceholder")}
                   className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
               </div>
               <div className="mb-4">
                 <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
-                  Password
+                {t("header.password")}
                 </label>
                 <input
                   type="password"
                   id="password"
-                  placeholder="Enter your password"
+                  placeholder={t("header.passwordPlaceholder")}
                   className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
               </div>
@@ -328,7 +328,7 @@ const Navbar = () => {
                 type="submit"
                 className="w-full bg-[#008ecc] text-white p-3 rounded-lg hover:bg-[#008fccb7]"
               >
-                Sign In
+                {t("header.signIn")}
               </button>
             </form>
 
@@ -337,7 +337,7 @@ const Navbar = () => {
               className="w-full bg-[#4285F4] text-white p-3 rounded-lg mt-4 flex items-center justify-center"
             >
               <i className="bi bi-google text-white text-lg mr-2"></i>
-              Continue with Google
+              {t("header.google")}
             </button>
           </div>
         </div>
