@@ -114,11 +114,11 @@ const Navbar = () => {
     <>
     <nav className="bg-[#fff] text-[#000] shadow-sm sticky top-0 z-50">
       <div className="bg-[#008ecc] p-2 text-center text-white text-xs md:text-base">
-      {t('headerText1')}:  
+      {t("header.text1")}:  
       <a href="https://wa.me/8801712345678?text=Hello%20ValoDeal%2C%20I%20want%20to%20know%20more%20about%20your%20products" target="_blank" className="mx-2">
       +8801321208940
       </a>
-       | {t('headerHotline')}:  
+       | {t('header.hotline')}:  
       <a href="tel:+8801234567890" className=" underline ml-2">
       09642-922922
       </a>
@@ -134,7 +134,7 @@ const Navbar = () => {
         <div className="w-2/5 mx-4 relative hidden lg:block">
           <input
             type="text"
-            placeholder={t('searchPlaceholder')}
+            placeholder={t('header.searchPlaceholder')}
             value={query}
             onChange={handleSearchChange}
             className="w-full p-3 rounded-lg bg-[] border border-[#008ecc] text-[#000] focus:outline-none focus:ring-2 focus:ring-[#008ecc]"
@@ -223,7 +223,7 @@ const Navbar = () => {
             onClick={toggleSignInModal}
             className="bg-[#008ecc] text-[#fff] hover:bg-[#008ecc] px-4 py-2 rounded-lg hidden md:block btn"
           >
-            {t('signIn')}
+            {t('header.signIn')}
           </button>
         </div>
 

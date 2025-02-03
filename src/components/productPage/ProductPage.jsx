@@ -144,7 +144,7 @@ const ProductCard = ({ product }) => {
       <p className="text-md font-bold text-gray-800 mb-3">{product.price[currentLang]}</p>
       <Link to='/cart'>
         <button className="w-full bg-[#008ecc] text-white py-2 rounded-lg hover:bg-[#006fab]">
-        {t('cart')}
+        {t('cart.addToCart')}
         </button>
       </Link>
     </Link>

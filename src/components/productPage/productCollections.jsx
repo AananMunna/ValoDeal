@@ -109,17 +109,24 @@ const ProductCard = ({ product }) => {
 };
 
 const ProductCollectionPage = () => {
-  const [selectedCategory, setSelectedCategory] = useState("Organic Oil");
-  const { t, i18n } = useTranslation();
+  const [selectedCategory, setSelectedCategory] = useState(productCollections[0].category);
+  const { t } = useTranslation();
+
+  // Map translated categories to original keys
+  const handleCategoryChange = (translatedCategory) => {
+    const originalCategory = productCollections.find(
+      (collection) => t(`categories.${collection.category}`) === translatedCategory
+    )?.category;
+
+    setSelectedCategory(originalCategory || productCollections[0].category);
+  };
+
   const selectedCollection = productCollections.find(
     (collection) => collection.category === selectedCategory
   );
 
-
   return (
     <div className="container mx-auto py-10 px-4">
-      {/* Language Toggle Buttons */}
-
       <h1 className="text-3xl font-bold text-center mb-8">
         {t("productCollections")}
       </h1>
@@ -134,7 +141,7 @@ const ProductCollectionPage = () => {
                 ? "bg-[#008ecc] text-white"
                 : "bg-gray-200 text-gray-800"
             } transition-colors duration-200`}
-            onClick={() => setSelectedCategory(collection.category)}
+            onClick={() => handleCategoryChange(t(`categories.${collection.category}`))}
           >
             {t(`categories.${collection.category}`)}
           </button>
@@ -143,7 +150,7 @@ const ProductCollectionPage = () => {
 
       {/* Product Grid */}
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-8">
-        {selectedCollection.products.map((product) => (
+        {selectedCollection?.products.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}
       </div>

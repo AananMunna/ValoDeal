@@ -4,6 +4,7 @@ import Footer from '../components/layout/Footer'
 import Navbar from '../components/layout/Navbar'
 import ProductCollectionPage from '../components/productPage/productCollections'
 import ProductPage from '../components/productPage/ProductPage'
+import FilterProduct from './productPage/FilterProduct'
 
 function Home() {
 
@@ -13,6 +14,7 @@ function Home() {
     <Hero />
     <ProductPage />
     <ProductCollectionPage />
+    <FilterProduct />
     <Footer />
     </>
   )
