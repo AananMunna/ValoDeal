@@ -93,7 +93,7 @@ const productCollections = [
 const ProductCard = ({ product }) => {
   const { t } = useTranslation();
   return (
-    <div className="bg-white p-4 rounded-xl shadow-lg transition-all transform hover:scale-105 hover:shadow-2xl duration-300">
+    <div className="bg-white p-4 rounded-xl shadow-lg transition-all transform hover:scale-105 hover:shadow-2xl duration-300 cursor-pointer">
       <div className="relative mb-4">
         <img
           src={product.imageUrl}
@@ -138,9 +138,9 @@ const ProductCollectionPage = () => {
             key={collection.category}
             className={`px-6 py-2 text-lg font-medium rounded-full my-2 ${
               selectedCategory === collection.category
-                ? "bg-[#008ecc] text-white"
-                : "bg-gray-200 text-gray-800"
-            } transition-colors duration-200`}
+                ? "bg-[#008ecc] block px-4 py-2 text-sm text-white cursor-pointer transition-all duration-300 transform hover:-translate-y-1 hover:scale-105 hover:shadow-2xl focus:outline-none active:scale-95"
+                : "bg-gray-200 text-gray-800 cursor-pointer transition-all duration-300 transform hover:-translate-y-1 hover:scale-105 hover:shadow-2xl focus:outline-none active:scale-95"
+            } transition-colors duration-200 `}
             onClick={() => handleCategoryChange(t(`categories.${collection.category}`))}
           >
             {t(`categories.${collection.category}`)}

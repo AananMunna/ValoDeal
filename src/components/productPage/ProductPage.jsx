@@ -132,22 +132,38 @@ const ProductCard = ({ product }) => {
   const currentLang = i18n.language || "en"; // Default to English if no language is set
 
   return (
-    <Link to='/filter' className="bg-white p-4 rounded-2xl shadow-md hover:shadow-lg transition-shadow">
-      <img
-        src={product.imageUrl}
-        alt={product.name[currentLang]} // Use translated name
-        className="w-full h-auto object-cover rounded-md mb-4"
-      />
-      <h2 className="text-lg font-semibold mb-2 truncate">
-        {product.name[currentLang]} {/* Use current language name */}
-      </h2>
-      <p className="text-md font-bold text-gray-800 mb-3">{product.price[currentLang]}</p>
-      <Link to='/cart'>
-        <button className="w-full bg-[#008ecc] text-white py-2 rounded-lg hover:bg-[#006fab]">
-        {t('cart.addToCart')}
-        </button>
-      </Link>
-    </Link>
+<Link
+  to='/filter'
+  className="bg-white p-4 rounded-2xl shadow-md hover:shadow-2xl transition-all transform hover:scale-[1.01] hover:translate-y- duration-[500ms] ease-[cubic-bezier(0.4,0,0.2,1)] will-change-transform"
+>
+  <img
+    src={product.imageUrl}
+    alt={product.name[currentLang]}
+    className="w-full h-auto object-cover rounded-md mb-4 transition-transform duration-[500ms] ease-in-out transform hover:scale-[1.05] will-change-transform"
+  />
+  <h2 className="text-lg font-semibold mb-2 truncate text-gray-900 transition-colors duration-[400ms] ease-in-out hover:text-[#008ecc]">
+    {product.name[currentLang]}
+  </h2>
+  <p className="text-md font-bold text-gray-800 mb-3 transition-all duration-[400ms] ease-in-out hover:text-[#008ecc]">
+    {product.price[currentLang]}
+  </p>
+  <Link to={`/product/${product.id}`}>
+    <button className="w-full bg-[#008ecc] text-white py-2 rounded-lg hover:bg-[#006fab] ease-in-out  active:translate-y-0.5 
+     
+
+    transition-all 
+    duration-300 
+    transform 
+    hover:-translate-y-1 hover:scale-105 hover:shadow-2xl 
+    focus:ring-4 focus:ring-blue-300 focus:outline-none active:scale-95">
+      {t('cart.addToCart')}
+    </button>
+  </Link>
+</Link>
+
+
+
+
   );
 };
 

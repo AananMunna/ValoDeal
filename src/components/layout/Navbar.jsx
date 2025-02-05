@@ -132,13 +132,31 @@ const Navbar = () => {
             </div>
         {/* Search Bar (Hidden on mobile, visible on larger screens) */}
         <div className="w-2/5 mx-4 relative hidden lg:block">
-          <input
-            type="text"
-            placeholder={t('header.searchPlaceholder')}
-            value={query}
-            onChange={handleSearchChange}
-            className="w-full p-3 rounded-lg bg-[] border border-[#008ecc] text-[#000] focus:outline-none focus:ring-2 focus:ring-[#008ecc]"
-          />
+        <input
+  type="text"
+  placeholder={t('header.searchPlaceholder')}
+  value={query}
+  onChange={handleSearchChange}
+  className="
+    w-full 
+    p-4 
+    rounded-2xl 
+    bg-white 
+    border 
+    border-[#008ecc] 
+    text-[#000] 
+    shadow-sm 
+    focus:outline-none 
+    focus:ring-4 
+    focus:ring-[#008ecc] 
+    transition-all 
+    duration-300 
+    ease-in-out 
+    transform focus:scale-105 hover:shadow-xl
+    placeholder:text-gray-400 placeholder:italic
+  "
+/>
+
           <button className="absolute right-3 top-3 text-[#000]">
             <i className="bi bi-search text-xl"></i>
           </button>
@@ -178,16 +196,46 @@ const Navbar = () => {
 
           {/* Cart Icon */}
           <Link to='/cart'>
-          <button className="hover:text-[#008ecc] relative">
-            <i className="bi bi-cart text-2xl"></i>
-            <span className="absolute top-0 right-0 bg-[#008ecc] text-white text-xs rounded-full px-1">3</span>
-          </button>
+          <button
+  className="relative group active:scale-90 transition-transform duration-200"
+>
+  <i className="bi bi-cart text-2xl text-gray-800 group-hover:text-[#008ecc] transition-transform duration-300 transform group-hover:scale-110 group-hover:rotate-12"></i>
+  <span
+    className="
+      absolute 
+      top-0 
+      right-0 
+      bg-[#008ecc] 
+      text-white 
+      text-xs 
+      rounded-full 
+      px-1 
+      animate-bounce 
+      transition-all 
+      duration-500 
+      ease-in-out 
+      group-hover:scale-110
+    "
+  >
+    3
+  </span>
+</button>
+
           </Link>
           {/* language select option */}
           <div className="relative inline-block text-left">
       <button
         onClick={toggleDropdown}
-        className="border rounded px-1 py-1 text-xs w-16 md:w-28 h-7 justify-center items-center mt-1 flex md:btn bg-transparent text-gray-700 hover:text-black focus:outline-none"
+        className="border text-xs w-16 md:w-28 h-7 justify-center items-center mt-1  md:btn bg-transparent text-gray-700 hover:text-black  bg-[#008ecc] 
+     
+    px-4 py-2 
+    rounded-lg flex
+    btn 
+    transition-all 
+    duration-300 
+    transform 
+    hover:-translate-y-1 hover:scale-105 hover:shadow-2xl 
+    focus:ring-4 focus:ring-blue-300 focus:outline-none active:scale-95"
       >
         <span>{selectedLanguage}</span>
         <i className="bi bi-chevron-down"></i>
@@ -201,7 +249,11 @@ const Navbar = () => {
             <a
               
               onClick={() => changeLanguageF('English')}
-              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
+              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer rounded-lg transition-all 
+    duration-300 
+    transform 
+    hover:-translate-y-1 hover:scale-105 hover:shadow-2xl 
+    focus:ring-4 focus:ring-blue-300 focus:outline-none active:scale-95"
             >
               English
             </a>
@@ -209,7 +261,11 @@ const Navbar = () => {
           <li>
             <a
               onClick={() => changeLanguageF('বাংলা')}
-              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
+              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer rounded-lg transition-all 
+    duration-300 
+    transform 
+    hover:-translate-y-1 hover:scale-105 hover:shadow-2xl 
+    focus:ring-4 focus:ring-blue-300 focus:outline-none active:scale-95"
             >
               বাংলা
             </a>
@@ -220,11 +276,24 @@ const Navbar = () => {
 
           {/* Sign In Button */}
           <button
-            onClick={toggleSignInModal}
-            className="bg-[#008ecc] text-[#fff] hover:bg-[#008ecc] px-4 py-2 rounded-lg hidden md:block btn"
-          >
-            {t('header.signIn')}
-          </button>
+  onClick={toggleSignInModal}
+  className="
+    bg-[#008ecc] 
+    text-white 
+    px-4 py-2 
+    rounded-lg 
+    hidden md:block 
+    btn 
+    transition-all 
+    duration-300 
+    transform 
+    hover:-translate-y-1 hover:scale-105 hover:shadow-2xl 
+    focus:ring-4 focus:ring-blue-300 focus:outline-none active:scale-95
+  "
+>
+  {t('header.signIn')}
+</button>
+
         </div>
 
         {/* Mobile Menu Button */}
