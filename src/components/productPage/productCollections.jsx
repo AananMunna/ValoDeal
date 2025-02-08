@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 
 // Example product collections with categories
 const productCollections = [
@@ -91,9 +92,14 @@ const productCollections = [
 ];
 
 const ProductCard = ({ product }) => {
+    const { i18n } = useTranslation();
+  const currentLang = i18n.language || "en";
   const { t } = useTranslation();
   return (
-    <div className="bg-white p-4 rounded-xl shadow-lg transition-all transform hover:scale-105 hover:shadow-2xl duration-300 cursor-pointer">
+    <Link
+    to={`/productDetails/${product.id}`} 
+  state={{ product }}
+    className="bg-white p-4 rounded-xl shadow-lg transition-all transform hover:scale-105 hover:shadow-2xl duration-300 cursor-pointer">
       <div className="relative mb-4">
         <img
           src={product.imageUrl}
@@ -102,9 +108,9 @@ const ProductCard = ({ product }) => {
         />
       </div>
       <h2 className="text-lg font-semibold text-gray-800 mb-2 truncate">
-        {t(`products.${product.name}`)}
+        {t(`products.${product.name[currentLang]}`)}
       </h2>
-    </div>
+    </Link>
   );
 };
 

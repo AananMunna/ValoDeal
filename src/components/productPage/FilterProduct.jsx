@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { Link } from 'react-router-dom';
 
 const FilterProduct = () => {
   const { t, i18n } = useTranslation();
@@ -63,57 +64,66 @@ const FilterProduct = () => {
         {/*  */}
 
         {/* Filters Sidebar */}
-        <div className="filters w-full sm:w-1/4 bg-gray-200 p-4 rounded-md mb-6 sm:mb-0">
-          <h2 className="text-xl font-semibold mb-4">{t("filters.filtersTitle")}</h2>
-          <div>
-            <h3>{t("filters.categoryTitle")}</h3>
-            <select
-              name="category"
-              value={filters.category}
-              onChange={handleFilterChange}
-              className="w-full p-2 mt-2 mb-4 border rounded-md"
-            >
-              <option value="">{t("filters.allCategories")}</option>
-              {Object.entries(t("categories", { returnObjects: true })).map(([key, value]) => (
-                key !== "all" && <option key={key} value={key}>{value}</option>
-              ))}
-            </select>
-          </div>
+        <div className="filters w-full sm:w-1/4 bg-gradient-to-r from-blue-500 to-blue-400 p-6 rounded-xl mb-6 sm:mb-0 shadow-lg transform hover:scale-105 transition-all duration-300 ease-in-out">
+  <h2 className="text-2xl font-semibold text-white mb-6">{t("filters.filtersTitle")}</h2>
 
-          <div>
-            <h3>{t("filters.priceTitle")}</h3>
-            <input
-              type="number"
-              name="priceFrom"
-              value={filters.priceFrom}
-              onChange={handleFilterChange}
-              className="w-full p-2 mt-2 mb-4 border rounded-md"
-              placeholder={t("filters.fromPrice")}
-            />
-            <h3>{t("filters.toPrice")}</h3>
-            <input
-              type="number"
-              name="priceTo"
-              value={filters.priceTo}
-              onChange={handleFilterChange}
-              className="w-full p-2 mt-2 mb-4 border rounded-md"
-              placeholder={t("filters.toPrice")}
-            />
-          </div>
+  <div className="filter-section mb-6">
+    <h3 className="text-lg font-medium text-white mb-2">{t("filters.categoryTitle")}</h3>
+    <select
+      name="category"
+      value={filters.category}
+      onChange={handleFilterChange}
+      className="w-full p-3 mt-2 mb-4 bg-white border-2 rounded-md text-gray-700 shadow-sm focus:ring-2 focus:ring-blue-500 transition-all duration-200 ease-in-out"
+    >
+      <option value="">{t("filters.allCategories")}</option>
+      {Object.entries(t("categories", { returnObjects: true })).map(([key, value]) => (
+        key !== "all" && <option key={key} value={key}>{value}</option>
+      ))}
+    </select>
+  </div>
 
-          <div>
-            <h3>{t("filters.stockTitle")}</h3>
-            <select
-              name="inStock"
-              value={filters.inStock}
-              onChange={handleFilterChange}
-              className="w-full p-2 mt-2 mb-4 border rounded-md"
-            >
-              <option value={true}>{t("filters.inStock")}</option>
-              <option value={false}>{t("filters.outOfStock")}</option>
-            </select>
-          </div>
-        </div>
+  <div className="filter-section mb-6">
+    <h3 className="text-lg font-medium text-white mb-2">{t("filters.priceTitle")}</h3>
+    <div className="flex space-x-4">
+      <input
+        type="number"
+        name="priceFrom"
+        value={filters.priceFrom}
+        onChange={handleFilterChange}
+        className="w-full p-3 mt-2 bg-white border-2 rounded-md text-gray-700 shadow-sm focus:ring-2 focus:ring-blue-500 transition-all duration-200 ease-in-out"
+        placeholder={t("filters.fromPrice")}
+      />
+      <input
+        type="number"
+        name="priceTo"
+        value={filters.priceTo}
+        onChange={handleFilterChange}
+        className="w-full p-3 mt-2 bg-white border-2 rounded-md text-gray-700 shadow-sm focus:ring-2 focus:ring-blue-500 transition-all duration-200 ease-in-out"
+        placeholder={t("filters.toPrice")}
+      />
+    </div>
+  </div>
+
+  <div className="filter-section mb-6">
+    <h3 className="text-lg font-medium text-white mb-2">{t("filters.stockTitle")}</h3>
+    <select
+      name="inStock"
+      value={filters.inStock}
+      onChange={handleFilterChange}
+      className="w-full p-3 mt-2 bg-white border-2 rounded-md text-gray-700 shadow-sm focus:ring-2 focus:ring-blue-500 transition-all duration-200 ease-in-out"
+    >
+      <option value={true}>{t("filters.inStock")}</option>
+      <option value={false}>{t("filters.outOfStock")}</option>
+    </select>
+  </div>
+
+  <button
+    className="w-full p-3 bg-gradient-to-r from-blue-600 to-blue-500 text-white rounded-md mt-6 transform hover:scale-105 transition-all duration-300 ease-in-out"
+  >
+    {t("filters.applyFilters")}
+  </button>
+</div>
+
 
         {/* Featured Products & Offer Section */}
         <div className="products w-full sm:w-3/4">
@@ -121,23 +131,37 @@ const FilterProduct = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {filteredProducts.map((product) => (
               <div
-                key={product.id}
-                className="product-card p-4 bg-white shadow rounded-md"
-              >
-                <img
-                  src={product.image}
-                  alt={t(product.name)}
-                  className="w-full h-40 object-cover rounded-md mb-4"
-                />
-                <h3 className="text-lg font-semibold mb-2">{t(product.name)}</h3>
-                <p className="text-lg text-gray-700">Tk {product.price}</p>
-                <button
-                  onClick={() => addToCart(product)}
-                  className="mt-4 p-2 bg-blue-500 text-white rounded-md"
-                >
-                  {t("cart.addToCart")}
-                </button>
-              </div>
+  key={product.id}
+  className="product-card p-4 bg-white rounded-xl shadow-xl hover:shadow-2xl transition-all transform hover:scale-105 hover:translate-y-2 duration-300 ease-in-out relative"
+>
+<Link 
+  to={`/productDetails/${product.id}`} 
+  state={{ product }}>
+  <div className="relative overflow-hidden rounded-xl">
+    <img
+      src={product.image}
+      alt={t(product.name)}
+      className="w-full h-40 object-cover rounded-xl transition-transform duration-500 ease-in-out hover:scale-110"
+    />
+    <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent to-black opacity-20 hover:opacity-50 transition-opacity duration-300"></div>
+  </div>
+
+  <h3 className="text-xl font-bold text-gray-800 mt-4 mb-2 transition-all duration-300 ease-in-out hover:text-[#008ecc]">{t(product.name)}</h3>
+  <p className="text-lg text-gray-700 mb-4 transition-all duration-300 ease-in-out">{`Tk ${product.price}`}</p>
+
+  <button
+    onClick={() => addToCart(product)}
+    className="p-3 bg-blue-500 text-white rounded-full w-full transform transition-transform duration-300 ease-in-out hover:scale-110 hover:bg-blue-600"
+  >
+    <span className="flex items-center justify-center space-x-2">
+      <i className="fas fa-cart-plus"></i> {/* Optional icon */}
+      <span>{t("cart.addToCart")}</span>
+    </span>
+  </button>
+  </Link>
+</div>
+
+
             ))}
           </div>
 
