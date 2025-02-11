@@ -462,7 +462,7 @@ const Navbar = () => {
       {/* Mobile Menu */}
       {isMenuOpen && (
        <div
-       className={`fixed top-0 right-0 w-80 h-full bg-white text-black z-50 shadow-xl transform transition-transform duration-500 ease-in-out ${
+       className={`fixed top-0 right-0 w-80 h-full bg-white text-black z-50 shadow-xl transform transition-transform duration-500 ease-in-out overflow-y-auto  ${
          isMenuOpen ? 'translate-x-0' : 'translate-x-full'
        }`}
      >
@@ -477,9 +477,45 @@ const Navbar = () => {
        </div>
  
        {/* Navigation Links */}
-       <nav className="px-6 py-0 space-y-6">
+       <nav className="px-6 py-0 space-y-6 ">
          <h2 className="text-xl font-semibold text-gray-700">Categories</h2>
          <ul className="space-y-4 text-lg font-medium">
+           <li className="p-3 rounded-lg bg-gray-100 hover:bg-blue-600 hover:text-white transition-colors duration-300 shadow-md">
+             <a href="/pants">Pants</a>
+           </li>
+           <li className="p-3 rounded-lg bg-gray-100 hover:bg-blue-600 hover:text-white transition-colors duration-300 shadow-md">
+             <a href="/pants">Pants</a>
+           </li>
+           <li className="p-3 rounded-lg bg-gray-100 hover:bg-blue-600 hover:text-white transition-colors duration-300 shadow-md">
+             <a href="/pants">Pants</a>
+           </li>
+           <li className="p-3 rounded-lg bg-gray-100 hover:bg-blue-600 hover:text-white transition-colors duration-300 shadow-md">
+             <a href="/pants">Pants</a>
+           </li>
+           <li className="p-3 rounded-lg bg-gray-100 hover:bg-blue-600 hover:text-white transition-colors duration-300 shadow-md">
+             <a href="/pants">Pants</a>
+           </li>
+           <li className="p-3 rounded-lg bg-gray-100 hover:bg-blue-600 hover:text-white transition-colors duration-300 shadow-md">
+             <a href="/pants">Pants</a>
+           </li>
+           <li className="p-3 rounded-lg bg-gray-100 hover:bg-blue-600 hover:text-white transition-colors duration-300 shadow-md">
+             <a href="/pants">Pants</a>
+           </li>
+           <li className="p-3 rounded-lg bg-gray-100 hover:bg-blue-600 hover:text-white transition-colors duration-300 shadow-md">
+             <a href="/pants">Pants</a>
+           </li>
+           <li className="p-3 rounded-lg bg-gray-100 hover:bg-blue-600 hover:text-white transition-colors duration-300 shadow-md">
+             <a href="/pants">Pants</a>
+           </li>
+           <li className="p-3 rounded-lg bg-gray-100 hover:bg-blue-600 hover:text-white transition-colors duration-300 shadow-md">
+             <a href="/pants">Pants</a>
+           </li>
+           <li className="p-3 rounded-lg bg-gray-100 hover:bg-blue-600 hover:text-white transition-colors duration-300 shadow-md">
+             <a href="/pants">Pants</a>
+           </li>
+           <li className="p-3 rounded-lg bg-gray-100 hover:bg-blue-600 hover:text-white transition-colors duration-300 shadow-md">
+             <a href="/pants">Pants</a>
+           </li>
            <li className="p-3 rounded-lg bg-gray-100 hover:bg-blue-600 hover:text-white transition-colors duration-300 shadow-md">
              <a href="/pants">Pants</a>
            </li>
