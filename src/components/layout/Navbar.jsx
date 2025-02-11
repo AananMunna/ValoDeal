@@ -477,7 +477,7 @@ const Navbar = () => {
        </div>
  
        {/* Navigation Links */}
-       <nav className="px-6 py-0 space-y-6 ">
+       <nav className="px-6 py-4 space-y-6 ">
          <h2 className="text-xl font-semibold text-gray-700">Categories</h2>
          <ul className="space-y-4 text-lg font-medium">
            <li className="p-3 rounded-lg bg-gray-100 hover:bg-blue-600 hover:text-white transition-colors duration-300 shadow-md">
