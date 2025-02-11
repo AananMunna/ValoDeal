@@ -461,32 +461,51 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div
-          className="fixed top-0 right-0 w-64 h-full bg-[#fff] text-[#000] z-50 shadow-lg transform transition-transform duration-300"
-          style={{
-            transform: isMenuOpen ? "translateX(0)" : "translateX(100%)"
-          }}
-        >
-          <div className="flex justify-end p-4">
-            <button onClick={toggleMenu} className="text-xl">
-              <i className="bi bi-x"></i>
-            </button>
-          </div>
-          <ul className="px-4 py-4">
-            <li className="p-2 text-xl hover:bg-[#008ecc] hover:text-white">
-              <a href="/">Home</a>
-            </li>
-            <li className="p-2 text-xl hover:bg-[#008ecc] hover:text-white">
-              <a href="/products">Products</a>
-            </li>
-            <li className="p-2 text-xl hover:bg-[#008ecc] hover:text-white">
-              <a href="/about">About</a>
-            </li>
-            <li className="p-2 text-xl hover:bg-[#008ecc] hover:text-white">
-              <a href="/contact">Contact</a>
-            </li>
-          </ul>
-        </div>
+       <div
+       className={`fixed top-0 right-0 w-80 h-full bg-white text-black z-50 shadow-xl transform transition-transform duration-500 ease-in-out ${
+         isMenuOpen ? 'translate-x-0' : 'translate-x-full'
+       }`}
+     >
+       {/* Close Button */}
+       <div className="flex justify-end p-4">
+         <button
+           onClick={toggleMenu}
+           className="text-2xl text-gray-600 hover:text-red-500 focus:outline-none transition-transform duration-300 transform hover:rotate-90"
+         >
+           <i className="bi bi-x text-4xl"></i>
+         </button>
+       </div>
+ 
+       {/* Navigation Links */}
+       <nav className="px-6 py-0 space-y-6">
+         <h2 className="text-xl font-semibold text-gray-700">Categories</h2>
+         <ul className="space-y-4 text-lg font-medium">
+           <li className="p-3 rounded-lg bg-gray-100 hover:bg-blue-600 hover:text-white transition-colors duration-300 shadow-md">
+             <a href="/pants">Pants</a>
+           </li>
+           <li className="p-3 rounded-lg bg-gray-100 hover:bg-blue-600 hover:text-white transition-colors duration-300 shadow-md">
+             <a href="/shirts">Shirts</a>
+           </li>
+           <li className="p-3 rounded-lg bg-gray-100 hover:bg-blue-600 hover:text-white transition-colors duration-300 shadow-md">
+             <a href="/shoes">Shoes</a>
+           </li>
+           <li className="p-3 rounded-lg bg-gray-100 hover:bg-blue-600 hover:text-white transition-colors duration-300 shadow-md">
+             <a href="/accessories">Accessories</a>
+           </li>
+         </ul>
+ 
+         <h2 className="text-xl font-semibold text-gray-700 mt-8">Other Links</h2>
+         <ul className="space-y-4 text-lg font-medium">
+           <li className="p-3 rounded-lg bg-gray-100 hover:bg-green-500 hover:text-white transition-colors duration-300 shadow-md">
+             <a href="/about">About Us</a>
+           </li>
+           <li className="p-3 rounded-lg bg-gray-100 hover:bg-green-500 hover:text-white transition-colors duration-300 shadow-md">
+             <a href="/contact">Contact</a>
+           </li>
+         </ul>
+       </nav>
+     </div>
+     
       )}
     </nav>
     </>
