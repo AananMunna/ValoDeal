@@ -127,7 +127,7 @@ const Navbar = () => {
         {/* Logo */}
         <div className="text-3xl font-extrabold text-[#F1E7D1]">
             <Link to='/'>
-            <img src={logo} className="w-28 mr-5" alt="" />
+            <img src={logo} className="w-28 md:w-32 mr-5" alt="" />
             </Link>
             </div>
         {/* Search Bar (Hidden on mobile, visible on larger screens) */}
@@ -319,7 +319,7 @@ const Navbar = () => {
             paddingTop: "20px"
           }}
         >
-          <div className="relative">
+          <div className="relative -top-2">
             <input
               type="text"
               placeholder="Search products..."
@@ -334,7 +334,7 @@ const Navbar = () => {
               className="absolute right-0 text-[#fff]"
               onClick={toggleSearchBar}
             >
-              <i className="bi bi-x text-4xl absolute top-0 right-0 bg-[#008ecc] pb-2 rounded-r-lg"></i>
+              <i className="bi bi-x text-4xl absolute top-0 right-0 bg-[#008ecc] p-1 rounded-r-lg"></i>
             </button>
           </div>
           {/* Suggestions Dropdown for mobile */}

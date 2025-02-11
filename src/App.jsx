@@ -6,12 +6,14 @@ import Home from './components/Home';
 import Test from './components/productPage/FilterProduct';
 import FilterProduct from './components/productPage/FilterProduct';
 import ProductDetails from './components/ProductDetails/ProductDetails';
+import ScrollToTop from './components/ScrollToTop/ScrollToTop';
 
 function App() {
 
   return (
     <>
     <Router>
+      <ScrollToTop />
       <div>
         {/* Define Routes */}
         <Routes>
