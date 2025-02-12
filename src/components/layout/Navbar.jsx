@@ -3,6 +3,7 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import logo from "../../assets/Daco_5715743.png";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { motion, AnimatePresence } from "framer-motion";
 
 const Navbar = () => {
   const { t, i18n } = useTranslation();
@@ -204,26 +205,34 @@ const Navbar = () => {
           
         </div>
 
-        {/* Mobile Search Bar */}
-        {isSearchOpen && (
-          <div className="fixed top-0 left-0 right-0 bg-white shadow-lg z-50 p-4 transition-all duration-500 ease-in-out">
-            <div className="relative flex items-center bg-gray-100 rounded-full p-2 shadow-sm">
-              <input
-                type="text"
-                placeholder="Search products..."
-                value={query}
-                onChange={handleSearchChange}
-                className="w-full bg-transparent px-4 py-2 rounded-full text-black focus:outline-none focus:ring-2 focus:ring-[#008ecc] placeholder-gray-500 placeholder:italic"
-              />
-              <button
-                onClick={toggleSearchBar}
-                className="text-white bg-[#008ecc] p-2 rounded-full ml-2 hover:bg-[#0077b3] transition-colors duration-300"
-              >
-                <i className="bi bi-x text-2xl"></i>
-              </button>
-            </div>
-          </div>
-        )}
+{/* Mobile Search Bar */}
+<AnimatePresence>
+  {isSearchOpen && (
+    <motion.div
+      initial={{ top: "-100%", opacity: 0 }}
+      animate={{ top: 0, opacity: 1 }}
+      exit={{ top: "-100%", opacity: 0 }}
+      transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }} // iPhone-like smoothness
+      className="fixed top-0 left-0 right-0 bg-white shadow-lg z-50 p-4"
+    >
+      <div className="relative flex items-center bg-gray-100 rounded-full p-2 shadow-sm">
+        <input
+          type="text"
+          placeholder="Search products..."
+          value={query}
+          onChange={handleSearchChange}
+          className="w-full bg-transparent px-4 py-2 rounded-full text-black focus:outline-none focus:ring-2 focus:ring-[#008ecc] placeholder-gray-500 placeholder:italic"
+        />
+        <button
+          onClick={toggleSearchBar}
+          className="text-white bg-[#008ecc] p-2 rounded-full ml-2 hover:bg-[#0077b3] transition-colors duration-300"
+        >
+          <i className="bi bi-x text-2xl"></i>
+        </button>
+      </div>
+    </motion.div>
+  )}
+</AnimatePresence>
 
         {/* Mobile Menu */}
         {isMenuOpen && (
