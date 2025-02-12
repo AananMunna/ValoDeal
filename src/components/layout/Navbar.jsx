@@ -123,7 +123,7 @@ const Navbar = () => {
           </div>
 
           {/* User Actions */}
-          <div className="flex items-center space-x-4 md:space-x-6">
+          <div className="flex items-center space-x-3 md:space-x-6">
             {/* Mobile Search Icon */}
             <button
               onClick={toggleSearchBar}
@@ -152,11 +152,19 @@ const Navbar = () => {
               </button>
             </Link>
 
+            {/* Mobile Menu Button */}
+          <button
+            onClick={toggleMenu}
+            className="lg:hidden text-3xl text-gray-800 hover:text-[#008ecc] transition-transform duration-300 transform hover:rotate-90"
+          >
+            <i className="bi bi-list"></i>
+          </button>
+
             {/* Language Dropdown */}
             <div className="relative inline-block text-left">
               <button
                 onClick={toggleDropdown}
-                className="flex items-center justify-center space-x-2 text-xs md:text-sm w-16 md:w-28 h-9 md:h-10 bg-white border border-gray-300 text-gray-700 hover:text-black hover:bg-gray-50 rounded-lg transition-all duration-300 transform hover:-translate-y-1 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#008ecc] focus:ring-opacity-50 active:scale-95"
+                className="flex items-center justify-center space-x-2 text-xs md:text-sm w-20 md:w-28 h-8 md:h-10 bg-white border border-gray-300 text-gray-700 hover:text-black hover:bg-gray-50 rounded-lg transition-all duration-300 transform hover:-translate-y-1 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#008ecc] focus:ring-opacity-50 active:scale-95"
               >
                 <span>{selectedLanguage}</span>
                 <i className="bi bi-chevron-down text-xs"></i>
@@ -193,13 +201,7 @@ const Navbar = () => {
             </button>
           </div>
 
-          {/* Mobile Menu Button */}
-          <button
-            onClick={toggleMenu}
-            className="lg:hidden text-3xl text-gray-800 hover:text-[#008ecc] transition-transform duration-300 transform hover:rotate-90"
-          >
-            <i className="bi bi-list"></i>
-          </button>
+          
         </div>
 
         {/* Mobile Search Bar */}
