@@ -26,6 +26,30 @@ const Navbar = () => {
     "Chairs",
     "Table",
     "Books",
+    "apple",
+    "smart-phon",
+    "Desktop",
+    "Ghee",
+    "Jackfruit",
+    "Keyboard",
+    "Phone",
+    "Orange",
+    "IPhone",
+    "Under",
+    "Yellow",
+    "T-Shirt",
+    "Edge",
+    "Windows",
+    "Query",
+    "Mango",
+    "Nature",
+    "Boss",
+    "Vector",
+    "Cow",
+    "X-ray",
+    "Z-Index",
+    "Rose",
+    "Flower",
     "Cameras",
   ];
 
@@ -261,82 +285,130 @@ const Navbar = () => {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="fixed top-0 right-0 w-80 h-full bg-white text-black z-50 shadow-xl transform transition-transform duration-500 ease-in-out overflow-y-auto">
-            <div className="flex justify-end p-4">
-              <button
-                onClick={toggleMenu}
-                className="text-2xl text-gray-600 hover:text-red-500 focus:outline-none transition-transform duration-300 transform hover:rotate-90"
-              >
-                <i className="bi bi-x text-4xl"></i>
-              </button>
-            </div>
-            <nav className="px-6 py-4 space-y-6">
-              <h2 className="text-xl font-semibold text-gray-700">Categories</h2>
-              <ul className="space-y-4 text-lg font-medium">
-                <li className="p-3 rounded-lg bg-gray-100 hover:bg-blue-600 hover:text-white transition-colors duration-300 shadow-md">
-                  <a href="/pants">Pants</a>
-                </li>
-              </ul>
-              <h2 className="text-xl font-semibold text-gray-700 mt-8">Other Links</h2>
-              <ul className="space-y-4 text-lg font-medium">
-                <li className="p-3 rounded-lg bg-gray-100 hover:bg-green-500 hover:text-white transition-colors duration-300 shadow-md">
-                  <a href="/about">About Us</a>
-                </li>
-                <li className="p-3 rounded-lg bg-gray-100 hover:bg-green-500 hover:text-white transition-colors duration-300 shadow-md">
-                  <a href="/contact">Contact</a>
-                </li>
-              </ul>
-            </nav>
-          </div>
+ <AnimatePresence>
+ {isMenuOpen && (
+   <>
+     {/* Overlay with fade-in & fade-out */}
+     <motion.div
+       initial={{ opacity: 0 }}
+       animate={{ opacity: 1 }}
+       exit={{ opacity: 0, transition: { duration: 0.3 } }}
+       transition={{ duration: 0.3 }}
+       className="fixed inset-0 bg-black bg-opacity-40 z-40"
+       onClick={toggleMenu}
+     />
+
+     {/* Smooth Slide-in & Slide-out Menu */}
+     <motion.div
+       initial={{ x: "100%" }}
+       animate={{ x: 0 }}
+       exit={{ x: "100%", transition: { duration: 0.5, ease: "easeInOut" } }}
+       transition={{ duration: 0.5, ease: "easeOut" }}
+       className="fixed top-0 right-0 w-80 h-full bg-white text-black z-50 shadow-xl overflow-y-auto"
+     >
+       <div className="flex justify-end p-4">
+         <motion.button
+           onClick={toggleMenu}
+           whileHover={{ rotate: 90 }}
+           whileTap={{ scale: 0.9 }}
+           className="text-2xl text-gray-600 hover:text-red-500 focus:outline-none"
+         >
+           <i className="bi bi-x text-4xl"></i>
+         </motion.button>
+       </div>
+
+       <nav className="px-6 py-4 space-y-6">
+         <h2 className="text-xl font-semibold text-gray-700">Categories</h2>
+         <ul className="space-y-4 text-lg font-medium">
+           <motion.li
+             whileHover={{ scale: 1.05 }}
+             whileTap={{ scale: 0.95 }}
+             className="p-3 rounded-lg bg-gray-100 hover:bg-blue-600 hover:text-white transition-colors duration-300 shadow-md"
+           >
+             <a href="/pants">Pants</a>
+           </motion.li>
+         </ul>
+
+         <h2 className="text-xl font-semibold text-gray-700 mt-8">Other Links</h2>
+         <ul className="space-y-4 text-lg font-medium">
+           <motion.li
+             whileHover={{ scale: 1.05 }}
+             whileTap={{ scale: 0.95 }}
+             className="p-3 rounded-lg bg-gray-100 hover:bg-green-500 hover:text-white transition-colors duration-300 shadow-md"
+           >
+             <a href="/about">About Us</a>
+           </motion.li>
+           <motion.li
+             whileHover={{ scale: 1.05 }}
+             whileTap={{ scale: 0.95 }}
+             className="p-3 rounded-lg bg-gray-100 hover:bg-green-500 hover:text-white transition-colors duration-300 shadow-md"
+           >
+             <a href="/contact">Contact</a>
+           </motion.li>
+         </ul>
+       </nav>
+     </motion.div>
+   </>
+ )}
+</AnimatePresence>
         )}
 
-        {/* Sign In Modal */}
-        {isSignInModalOpen && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-            <div className="bg-white p-6 rounded-lg w-96 transform transition-all duration-500 ease-in-out">
-              <button
-                onClick={toggleSignInModal}
-                className="absolute top-3 right-3 text-gray-600 hover:text-gray-900"
-              >
-                <i className="bi bi-x-lg text-2xl"></i>
-              </button>
-              <h2 className="text-2xl font-semibold mb-4 text-center">{t("header.signIn")}</h2>
-              <form>
-                <div className="mb-4">
-                  <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
-                    {t("header.email")}
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    placeholder={t("header.emailPlaceholder")}
-                    className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  />
-                </div>
-                <div className="mb-4">
-                  <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
-                    {t("header.password")}
-                  </label>
-                  <input
-                    type="password"
-                    id="password"
-                    placeholder={t("header.passwordPlaceholder")}
-                    className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  />
-                </div>
-                <button
-                  type="submit"
-                  className="w-full bg-[#008ecc] text-white p-3 rounded-lg hover:bg-[#008fccb7]"
-                >
-                  {t("header.signIn")}
-                </button>
-              </form>
-              <button className="w-full bg-[#4285F4] text-white p-3 rounded-lg mt-4 flex items-center justify-center">
-                <i className="bi bi-google text-white text-lg mr-2"></i>
-                {t("header.google")}
-              </button>
-            </div>
-          </div>
+{/* Sign In Modal */}
+{isSignInModalOpen && (
+  <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+    {/* Modal Container with Zoom-in and Fade-in effect */}
+    <motion.div
+      className="bg-white p-6 rounded-lg w-96"
+      initial={{ opacity: 0, scale: 0.95 }} // Initial state: faded and zoomed out
+      animate={{ opacity: 1, scale: 1 }}    // Final state: fully visible and scaled
+      exit={{ opacity: 0, scale: 0.95 }}    // Exit state: faded and zoomed out
+      transition={{ duration: 0.5, ease: "easeOut" }} // Smooth transition
+    >
+      <div className="relative">
+      <button
+        onClick={toggleSignInModal}
+        className="absolute -top-4 -right-3 text-gray-600 hover:text-gray-900"
+      >
+        <i className="bi bi-x-lg text-2xl"></i>
+      </button>
+      </div>
+      <h2 className="text-2xl font-semibold mb-4 text-center">{t("header.signIn")}</h2>
+      <form>
+        <div className="mb-4">
+          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
+            {t("header.email")}
+          </label>
+          <input
+            type="email"
+            id="email"
+            placeholder={t("header.emailPlaceholder")}
+            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+        <div className="mb-4">
+          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
+            {t("header.password")}
+          </label>
+          <input
+            type="password"
+            id="password"
+            placeholder={t("header.passwordPlaceholder")}
+            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+        <button
+          type="submit"
+          className="w-full bg-[#008ecc] text-white p-3 rounded-lg hover:bg-[#008fccb7]"
+        >
+          {t("header.signIn")}
+        </button>
+      </form>
+      <button className="w-full bg-[#4285F4] text-white p-3 rounded-lg mt-4 flex items-center justify-center">
+        <i className="bi bi-google text-white text-lg mr-2"></i>
+        {t("header.google")}
+      </button>
+    </motion.div>
+  </div>
         )}
       </nav>
     </>
