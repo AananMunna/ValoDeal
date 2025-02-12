@@ -1,0 +1,40 @@
+/* Add this to your global CSS file */
+.transition-all {
+    transition-property: all;
+  }
+  
+  .duration-500 {
+    transition-duration: 500ms;
+  }
+  
+  .ease-in-out {
+    transition-timing-function: ease-in-out;
+  }
+  
+  .hover\:bg-\[\#0077b3\]:hover {
+    background-color: #0077b3;
+  }
+  
+  .hover\:text-\[\#008ecc\]:hover {
+    color: #008ecc;
+  }
+  
+  .transform {
+    transform: translateZ(0); /* Enable hardware acceleration */
+  }
+  
+  .opacity-0 {
+    opacity: 0;
+  }
+  
+  .opacity-100 {
+    opacity: 1;
+  }
+  
+  .translate-y-0 {
+    transform: translateY(0);
+  }
+  
+  .-translate-y-full {
+    transform: translateY(-100%);
+  }
