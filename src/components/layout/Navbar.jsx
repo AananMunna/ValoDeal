@@ -88,7 +88,7 @@ const Navbar = () => {
         <div className="container mx-auto flex justify-between items-center py-4 px-1">
           {/* Logo */}
           <Link to="/" className="text-3xl font-extrabold">
-            <img src={logo} className="w-28 md:w-32" alt="Logo" />
+            <img src={logo} className="w-24 h-8 md:w-32" alt="Logo" />
           </Link>
 
           {/* Search Bar (Desktop) */}
@@ -123,7 +123,7 @@ const Navbar = () => {
           </div>
 
           {/* User Actions */}
-          <div className="flex items-center space-x-3 md:space-x-6">
+          <div className="flex items-center space-x-2 md:space-x-6">
             {/* Mobile Search Icon */}
             <button
               onClick={toggleSearchBar}
