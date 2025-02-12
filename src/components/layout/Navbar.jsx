@@ -207,32 +207,57 @@ const Navbar = () => {
 
 {/* Mobile Search Bar */}
 <AnimatePresence>
-  {isSearchOpen && (
-    <motion.div
-      initial={{ top: "-100%", opacity: 0 }}
-      animate={{ top: 0, opacity: 1 }}
-      exit={{ top: "-100%", opacity: 0 }}
-      transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }} // iPhone-like smoothness
-      className="fixed top-0 left-0 right-0 bg-white shadow-lg z-50 p-4"
-    >
-      <div className="relative flex items-center bg-gray-100 rounded-full p-2 shadow-sm">
-        <input
-          type="text"
-          placeholder="Search products..."
-          value={query}
-          onChange={handleSearchChange}
-          className="w-full bg-transparent px-4 py-2 rounded-full text-black focus:outline-none focus:ring-2 focus:ring-[#008ecc] placeholder-gray-500 placeholder:italic"
-        />
-        <button
-          onClick={toggleSearchBar}
-          className="text-white bg-[#008ecc] p-2 rounded-full ml-2 hover:bg-[#0077b3] transition-colors duration-300"
+      {isSearchOpen && (
+        <motion.div
+          initial={{ top: "-100%", opacity: 0 }}
+          animate={{ top: 0, opacity: 1 }}
+          exit={{ top: "-100%", opacity: 0 }}
+          transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
+          className="fixed top-0 left-0 right-0 bg-white shadow-lg z-50 p-4"
         >
-          <i className="bi bi-x text-2xl"></i>
-        </button>
-      </div>
-    </motion.div>
-  )}
-</AnimatePresence>
+          <div className="relative flex items-center bg-gray-100 rounded-full p-2 shadow-sm">
+            <input
+              type="text"
+              placeholder="Search products..."
+              value={query}
+              onChange={handleSearchChange}
+              className="w-full bg-transparent px-4 py-2 rounded-full text-black focus:outline-none focus:ring-2 focus:ring-[#008ecc] placeholder-gray-500 placeholder:italic"
+            />
+            <button
+              onClick={toggleSearchBar}
+              className="text-white bg-[#008ecc] p-2 rounded-full ml-2 hover:bg-[#0077b3] transition-colors duration-300"
+            >
+              <i className="bi bi-x text-2xl"></i>
+            </button>
+          </div>
+
+          {/* Search Suggestions */}
+          <AnimatePresence>
+            {query && suggestions.length > 0 && (
+              <motion.ul
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.3, ease: "easeOut" }}
+                className="mt-2 bg-white border rounded-lg shadow-md overflow-hidden"
+              >
+                {suggestions.map((suggestion, index) => (
+                  <motion.li
+                    key={index}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="p-3 hover:bg-gray-100 cursor-pointer transition-all duration-200"
+                    onClick={() => handleSearchChange({ target: { value: suggestion } })}
+                  >
+                    {suggestion}
+                  </motion.li>
+                ))}
+              </motion.ul>
+            )}
+          </AnimatePresence>
+        </motion.div>
+      )}
+    </AnimatePresence>
 
         {/* Mobile Menu */}
         {isMenuOpen && (
