@@ -198,7 +198,7 @@ const Navbar = () => {
   <div className="relative">
     <button
       onClick={toggleDropdown}
-      className="flex items-center justify-center space-x-2 p-3 rounded-full bg-white shadow-sm text-xs md:text-sm transition-all duration-300 hover:scale-110 hover:shadow-md active:scale-90"
+      className="flex flex-col lg:flex-row items-center justify-center space-x-2 p-3 rounded-full bg-white shadow-sm text-[8px] md:text-sm transition-all duration-300 hover:scale-110 hover:shadow-md active:scale-90"
     >
       <span>{selectedLanguage}</span>
       <i className="bi bi-chevron-down text-xs"></i>
