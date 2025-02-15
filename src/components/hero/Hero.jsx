@@ -26,10 +26,10 @@ const Hero = () => {
           src={carouselImages[currentIndex]}
           alt={`Slide ${currentIndex + 1}`}
           className="absolute w-full h-full object-cover"
-          initial={{ opacity: 1, scale: 1.1 }} // Start slightly zoomed in
-          animate={{ opacity: 1, scale: 1 }} // Zoom out
-          exit={{ opacity: 1, scale: 1.1 }} // Zoom in
-          transition={{ duration: 3, ease: "easeInOut" }} // Smooth transition
+          initial={{ opacity: 1, scale: 1.7 }} // Start slightly zoomed in
+          animate={{ opacity: 1, scale: .95 }} // Zoom out
+          exit={{ opacity: 1, scale: 1.7 }} // Zoom in
+          transition={{ duration: 1, ease: "easeInOut" }} // Smooth transition
         />
       </AnimatePresence>
     </div>
