@@ -100,7 +100,7 @@ const Navbar = () => {
         <Header />
 
         {/* Main Navbar */}
-        <div className="container mx-auto flex justify-between items-center py-4 px-1">
+        <div className="container mx-auto flex justify-between items-center lg:py-3 px-2">
           {/* Logo */}
           <Link to="/" className="text-3xl font-extrabold hidden lg:block ">
             <img src={logo} className="w-24 h-8 md:w-32" alt="Logo" />
@@ -152,14 +152,14 @@ const Navbar = () => {
           </div>
 
           {/* User Actions */}
-          <div className="flex items-center justify-between lg:justify-normal w-full mx-auto lg:mx-0 lg:w-auto space-x-3 md:space-x-6 bg-white/90 backdrop-blur-lg p-2 lg:p-0 rounded-full shadow-lg absolute lg:relative top-1 left-0 right-0">
+          <div className="flex items-center justify-between lg:justify-normal w-full mx-auto lg:mx-0 lg:w-auto space-x-3 md:space-x-6 bg-white/90 backdrop-blur-lg p-2 lg:p-0 rounded-full shadow-lg fixed lg:relative bottom-1 left-0 right-0 border lg:border-none">
           <Link to="/" className="text-3xl font-extrabold lg:hidden">
             <img src={logo} className=" h-7" alt="Logo" />
           </Link>
   {/* Mobile Search Icon */}
   <button
     onClick={toggleSearchBar}
-    className="lg:hidden p-3 rounded-full bg-white shadow-sm transition-all duration-300 hover:scale-110 hover:shadow-md active:scale-90"
+    className="lg:hidden p-3 rounded-full bg-white shadow-md transition-all duration-300 hover:scale-110 hover:shadow-md active:scale-90"
     aria-label="Toggle Search Bar"
   >
     <i className="bi bi-search text-2xl text-gray-900"></i>
@@ -168,7 +168,7 @@ const Navbar = () => {
   {/* User Icon */}
   <button
     onClick={toggleSignInModal}
-    className="p-3 rounded-full bg-white shadow-sm transition-all duration-300 hover:scale-110 hover:shadow-md active:scale-90"
+    className="p-3 rounded-full bg-white shadow-md transition-all duration-300 hover:scale-110 hover:shadow-md active:scale-90"
     aria-label="User Account"
   >
     <i className="bi bi-person text-2xl text-gray-900"></i>
@@ -176,7 +176,7 @@ const Navbar = () => {
 
   {/* Cart Icon */}
   <Link to="/cart">
-    <button className="relative p-3 rounded-full bg-white shadow-sm transition-all duration-300 hover:scale-110 hover:shadow-md active:scale-90">
+    <button className="relative p-3 rounded-full bg-white shadow-md transition-all duration-300 hover:scale-110 hover:shadow-md active:scale-90">
       <i className="bi bi-cart text-2xl text-gray-900 transition-transform duration-300 transform group-hover:scale-110 group-hover:rotate-12"></i>
       {cart.length > 0 && (
         <span className="absolute -top-1.5 -right-1.5 bg-red-500 text-white text-xs rounded-full px-1.5 py-0.5 transition-all duration-500 ease-in-out group-hover:scale-110 group-hover:animate-pulse">
@@ -189,7 +189,7 @@ const Navbar = () => {
   {/* Mobile Menu Button */}
   <button
     onClick={toggleMenu}
-    className="lg:hidden p-3 rounded-full bg-white shadow-sm transition-transform duration-300 transform hover:scale-110 hover:rotate-90 active:scale-90"
+    className="lg:hidden p-3 rounded-full bg-white shadow-md transition-transform duration-300 transform hover:scale-110 hover:rotate-90 active:scale-90"
   >
     <i className="bi bi-list text-2xl text-gray-900"></i>
   </button>
@@ -198,14 +198,14 @@ const Navbar = () => {
   <div className="relative">
     <button
       onClick={toggleDropdown}
-      className="flex flex-col lg:flex-row items-center justify-center space-x-2 p-3 rounded-full bg-white shadow-sm text-[8px] md:text-sm transition-all duration-300 hover:scale-110 hover:shadow-md active:scale-90"
+      className="flex flex-col lg:flex-row items-center justify-center space-x-2 p-3 rounded-full bg-white shadow-md text-[8px] md:text-sm transition-all duration-300 hover:scale-110 hover:shadow-md active:scale-90"
     >
       <span>{selectedLanguage}</span>
       <i className="bi bi-chevron-down text-xs"></i>
     </button>
 
     {isOpen && (
-      <ul className="absolute right-0 mt-2 w-32 py-2 bg-white shadow-xl rounded-lg border border-gray-200 transition-all duration-300 ease-in-out">
+      <ul className="absolute right-0 bottom-16 lg:-bottom-24 mt-2 w-32 py-2 bg-white shadow-xl rounded-lg border border-gray-200 transition-all duration-300 ease-in-out">
         <li>
           <a
             onClick={() => changeLanguageF("English")}
