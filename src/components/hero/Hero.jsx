@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const Hero = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -17,6 +18,7 @@ const Hero = () => {
   }, []);
 
   return (
+    <Link to='/filter'>
     <div className="relative w-full h-[200px] sm:h-[400px] md:h-[500px] overflow-hidden">
       <AnimatePresence mode="wait">
         <motion.img
@@ -31,6 +33,7 @@ const Hero = () => {
         />
       </AnimatePresence>
     </div>
+    </Link>
   );
 };
 

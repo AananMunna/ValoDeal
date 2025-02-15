@@ -1,12 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion"; // Import Framer Motion for animations
+import { useCart } from '../../context/CartContext'; 
 
 const ProductCard = ({ product }) => {
   const { t } = useTranslation();
   const { i18n } = useTranslation(); // Get language function from react-i18next
   const currentLang = i18n.language || "en"; // Default to English if no language is set
+
+  const { addToCart } = useCart();
+  const [showPopup, setShowPopup] = useState(false);
+
+  const handleAddToCart = (product) => {
+    addToCart(product);
+    setShowPopup(true);
+    setTimeout(() => setShowPopup(false), 2000); // Hide popup after 2 seconds
+  };
 
   return (
     <motion.div
@@ -40,17 +50,29 @@ const ProductCard = ({ product }) => {
             </p>
           )}
         </div>
-
-        {/* Add to Cart Button */}
-        <motion.button
-          className="w-full bg-blue-600 text-white py-3 sm:py-2 rounded-lg mt-2 hover:bg-blue-700 active:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 transition-all duration-300 transform hover:scale-105 hover:shadow-xl"
-          whileHover={{ scale: 1.05, y: -2 }}
-          transition={{ duration: 0.3 }}
-          onClick={() => addToCart(product)}
-        >
-          {t("cart.addToCart")}
-        </motion.button>
       </Link>
+
+      {/* Add to Cart Button */}
+      <motion.button
+        className="w-full bg-blue-600 text-white py-3 sm:py-2 rounded-lg mt-2 hover:bg-blue-700 active:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 transition-all duration-300 transform hover:scale-105 hover:shadow-xl"
+        whileHover={{ scale: 1.05, y: -2 }}
+        transition={{ duration: 0.3 }}
+        onClick={() => handleAddToCart(product)}
+      >
+        {t("cart.addToCart")}
+      </motion.button>
+
+      {/* Popup Message */}
+      {showPopup && (
+        <motion.div
+          className="fixed bottom-16 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-6 py-3 rounded-full text-center shadow-md z-50"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3 }}
+        >
+          {t("cart.addedToCart")}
+        </motion.div>
+      )}
     </motion.div>
   );
 };

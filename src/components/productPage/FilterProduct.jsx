@@ -1,6 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
+import { debounce } from "lodash";
+import Navbar from "./../layout/Navbar";
+import Footer from "./../layout/Footer";
 
 const FilterProduct = () => {
   const { t, i18n } = useTranslation();
@@ -9,11 +13,13 @@ const FilterProduct = () => {
     priceFrom: 0,
     priceTo: 5700,
     inStock: true,
+    searchQuery: "",
   });
 
   const [cart, setCart] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const [isFiltersVisible, setIsFiltersVisible] = useState(false);
 
   const products = [
     { id: 1, name: "products.Organic Honey", category: "categories.Organic Oil", price: 1500, inStock: true, image: "https://ghorerbazar.com/cdn/shop/files/WhatsAppImage2025-01-12at6.51.00PM.jpg?v=1736686474&width=533" },
@@ -26,15 +32,26 @@ const FilterProduct = () => {
     { id: 8, name: "products.Herbal Tea", category: "categories.teaCoffee", price: 450, inStock: true, image: "https://ghorerbazar.com/cdn/shop/files/tea-1kg.png?v=1730104547&width=360" },
   ];
 
-  const filteredProducts = products.filter((product) => {
-    const inPriceRange =
-      product.price >= filters.priceFrom && product.price <= filters.priceTo;
-    const inStock = filters.inStock ? product.inStock : true;
-    const matchesCategory =
-      filters.category ? product.category === filters.category : true;
+  const [filteredProducts, setFilteredProducts] = useState(products);
 
-    return inPriceRange && inStock && matchesCategory;
-  });
+  // Debounced search function
+  const debouncedFilter = debounce(() => {
+    const filtered = products.filter((product) => {
+      const inPriceRange =
+        product.price >= filters.priceFrom && product.price <= filters.priceTo;
+      const inStock = filters.inStock ? product.inStock : true;
+      const matchesCategory = filters.category ? product.category === filters.category : true;
+      const matchesSearch = product.name.toLowerCase().includes(filters.searchQuery.toLowerCase());
+
+      return inPriceRange && inStock && matchesCategory && matchesSearch;
+    });
+    setFilteredProducts(filtered);
+  }, 300);
+
+  useEffect(() => {
+    debouncedFilter();
+    return () => debouncedFilter.cancel();
+  }, [filters]);
 
   const handleFilterChange = (e) => {
     const { name, value } = e.target;
@@ -54,156 +71,171 @@ const FilterProduct = () => {
     setIsModalOpen(false);
   };
 
-  const changeLanguage = (lng) => {
-    i18n.changeLanguage(lng);
+  const toggleFilters = () => {
+    setIsFiltersVisible(!isFiltersVisible);
   };
 
   return (
     <>
-      <div className="container mx-auto p-8 flex flex-wrap md:flex-nowrap gap-5">
-        {/*  */}
+      <Navbar />
+      <div className="container mx-auto p-4">
+        {/* Mobile Filters Toggle Button */}
+        <button
+          onClick={toggleFilters}
+          className="lg:hidden w-full p-3 bg-blue-500 text-white rounded-md mb-4"
+        >
+          {isFiltersVisible ? t("filters.hideFilters") : t("filters.showFilters")}
+        </button>
 
-        {/* Filters Sidebar */}
-        <div className="filters w-full sm:w-1/4 bg-gradient-to-r from-blue-500 to-blue-400 p-6 rounded-xl mb-6 sm:mb-0 shadow-lg transform hover:scale-105 transition-all duration-300 ease-in-out">
-  <h2 className="text-2xl font-semibold text-white mb-6">{t("filters.filtersTitle")}</h2>
+        <div className="flex flex-wrap md:flex-nowrap gap-5">
+          {/* Filters Sidebar */}
+          <motion.div
+            className={`filters w-full sm:w-1/4 bg-gradient-to-r from-blue-500 to-blue-400 p-6 rounded-xl shadow-lg ${
+              isFiltersVisible ? "block" : "hidden lg:block"
+            }`}
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            <h2 className="text-2xl font-semibold text-white mb-6">{t("filters.filtersTitle")}</h2>
+            <div className="filter-section mb-6">
+              <h3 className="text-lg font-medium text-white mb-2">{t("filters.categoryTitle")}</h3>
+              <select
+                name="category"
+                value={filters.category}
+                onChange={handleFilterChange}
+                className="w-full p-3 bg-white border-2 rounded-md text-gray-700 shadow-sm"
+              >
+                <option value="">{t("filters.allCategories")}</option>
+                {Object.entries(t("categories", { returnObjects: true })).map(([key, value]) => (
+                  <option key={key} value={key}>{value}</option>
+                ))}
+              </select>
+            </div>
+            <div className="filter-section mb-6">
+              <h3 className="text-lg font-medium text-white mb-2">{t("filters.priceTitle")}</h3>
+              <div className="flex space-x-4">
+                <input
+                  type="number"
+                  name="priceFrom"
+                  value={filters.priceFrom}
+                  onChange={handleFilterChange}
+                  className="w-full p-3 bg-white border-2 rounded-md text-gray-700 shadow-sm"
+                  placeholder={t("filters.fromPrice")}
+                />
+                <input
+                  type="number"
+                  name="priceTo"
+                  value={filters.priceTo}
+                  onChange={handleFilterChange}
+                  className="w-full p-3 bg-white border-2 rounded-md text-gray-700 shadow-sm"
+                  placeholder={t("filters.toPrice")}
+                />
+              </div>
+            </div>
+            <div className="filter-section mb-6">
+              <h3 className="text-lg font-medium text-white mb-2">{t("filters.stockTitle")}</h3>
+              <select
+                name="inStock"
+                value={filters.inStock}
+                onChange={handleFilterChange}
+                className="w-full p-3 bg-white border-2 rounded-md text-gray-700 shadow-sm"
+              >
+                <option value={true}>{t("filters.inStock")}</option>
+                <option value={false}>{t("filters.outOfStock")}</option>
+              </select>
+            </div>
+            <div className="filter-section mb-6">
+              <h3 className="text-lg font-medium text-white mb-2">{t("filters.searchTitle")}</h3>
+              <input
+                type="text"
+                name="searchQuery"
+                value={filters.searchQuery}
+                onChange={handleFilterChange}
+                className="w-full p-3 bg-white border-2 rounded-md text-gray-700 shadow-sm"
+                placeholder={t("filters.searchPlaceholder")}
+              />
+            </div>
+          </motion.div>
 
-  <div className="filter-section mb-6">
-    <h3 className="text-lg font-medium text-white mb-2">{t("filters.categoryTitle")}</h3>
-    <select
-      name="category"
-      value={filters.category}
-      onChange={handleFilterChange}
-      className="w-full p-3 mt-2 mb-4 bg-white border-2 rounded-md text-gray-700 shadow-sm focus:ring-2 focus:ring-blue-500 transition-all duration-200 ease-in-out"
-    >
-      <option value="">{t("filters.allCategories")}</option>
-      {Object.entries(t("categories", { returnObjects: true })).map(([key, value]) => (
-        key !== "all" && <option key={key} value={key}>{value}</option>
-      ))}
-    </select>
-  </div>
-
-  <div className="filter-section mb-6">
-    <h3 className="text-lg font-medium text-white mb-2">{t("filters.priceTitle")}</h3>
-    <div className="flex space-x-4">
-      <input
-        type="number"
-        name="priceFrom"
-        value={filters.priceFrom}
-        onChange={handleFilterChange}
-        className="w-full p-3 mt-2 bg-white border-2 rounded-md text-gray-700 shadow-sm focus:ring-2 focus:ring-blue-500 transition-all duration-200 ease-in-out"
-        placeholder={t("filters.fromPrice")}
-      />
-      <input
-        type="number"
-        name="priceTo"
-        value={filters.priceTo}
-        onChange={handleFilterChange}
-        className="w-full p-3 mt-2 bg-white border-2 rounded-md text-gray-700 shadow-sm focus:ring-2 focus:ring-blue-500 transition-all duration-200 ease-in-out"
-        placeholder={t("filters.toPrice")}
-      />
-    </div>
-  </div>
-
-  <div className="filter-section mb-6">
-    <h3 className="text-lg font-medium text-white mb-2">{t("filters.stockTitle")}</h3>
-    <select
-      name="inStock"
-      value={filters.inStock}
-      onChange={handleFilterChange}
-      className="w-full p-3 mt-2 bg-white border-2 rounded-md text-gray-700 shadow-sm focus:ring-2 focus:ring-blue-500 transition-all duration-200 ease-in-out"
-    >
-      <option value={true}>{t("filters.inStock")}</option>
-      <option value={false}>{t("filters.outOfStock")}</option>
-    </select>
-  </div>
-
-  <button
-    className="w-full p-3 bg-gradient-to-r from-blue-600 to-blue-500 text-white rounded-md mt-6 transform hover:scale-105 transition-all duration-300 ease-in-out"
-  >
-    {t("filters.applyFilters")}
-  </button>
-</div>
-
-
-        {/* Featured Products & Offer Section */}
-        <div className="products w-full sm:w-3/4">
-          <h2 className="text-2xl font-bold mb-6">{t("translation.featuredProducts")}</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {filteredProducts.map((product) => (
-              <div
-  key={product.id}
-  className="product-card p-4 bg-white rounded-xl shadow-xl hover:shadow-2xl transition-all transform hover:scale-105 hover:translate-y-2 duration-300 ease-in-out relative"
->
-<Link 
-  to={`/productDetails/${product.id}`} 
-  state={{ product }}>
-  <div className="relative overflow-hidden rounded-xl">
-    <img
-      src={product.image}
-      alt={t(product.name)}
-      className="w-full h-40 object-cover rounded-xl transition-transform duration-500 ease-in-out hover:scale-110"
-    />
-    <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent to-black opacity-20 hover:opacity-50 transition-opacity duration-300"></div>
-  </div>
-
-  <h3 className="text-xl font-bold text-gray-800 mt-4 mb-2 transition-all duration-300 ease-in-out hover:text-[#008ecc]">{t(product.name)}</h3>
-  <p className="text-lg text-gray-700 mb-4 transition-all duration-300 ease-in-out">{`Tk ${product.price}`}</p>
-
-  <button
-    onClick={() => addToCart(product)}
-    className="p-3 bg-blue-500 text-white rounded-full w-full transform transition-transform duration-300 ease-in-out hover:scale-110 hover:bg-blue-600"
-  >
-    <span className="flex items-center justify-center space-x-2">
-      <i className="fas fa-cart-plus"></i> {/* Optional icon */}
-      <span>{t("cart.addToCart")}</span>
-    </span>
-  </button>
-  </Link>
-</div>
-
-
-            ))}
-          </div>
-
-          <h2 className="text-2xl font-bold mt-8 mb-4">{t("offers.title")}</h2>
-          <div className="offers bg-gray-100 p-6 rounded-md shadow">
-            <h3 className="text-xl font-semibold">{t("offers.title")}</h3>
-            <p>{t("offers.description")}</p>
+          {/* Products Section */}
+          <div className="products w-full sm:w-3/4">
+            <h2 className="text-2xl font-bold mb-6">{t("translation.featuredProducts")}</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+              {filteredProducts.map((product) => (
+                <motion.div
+                  key={product.id}
+                  className="product-card p-4 bg-white rounded-xl shadow-xl hover:shadow-2xl transition-all transform hover:scale-105"
+                  whileHover={{ scale: 1.05 }}
+                >
+                  <Link to={`/productDetails/${product.id}`} state={{ product }}>
+                    <img
+                      src={product.image}
+                      alt={t(product.name)}
+                      className="w-full h-40 object-cover rounded-xl"
+                    />
+                    <h3 className="text-xl font-bold text-gray-800 mt-4">{t(product.name)}</h3>
+                    <p className="text-lg text-gray-700 mb-4">{`Tk ${product.price}`}</p>
+                  </Link>
+                  <button
+                    onClick={() => addToCart(product)}
+                    className="w-full p-3 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+                  >
+                    {t("cart.addToCart")}
+                  </button>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* Cart Section */}
-      <div className="cart w-full mt-8 bg-gray-100 p-6 rounded-md shadow">
-        <h2 className="text-2xl font-bold">{t("cart.pageTitle")}</h2>
-        <ul>
-          {cart.map((product, index) => (
-            <li key={index} className="text-lg text-gray-700">
-              {t(product.name)} - Tk {product.price}
-            </li>
-          ))}
-        </ul>
-        <h3 className="mt-4 font-semibold">
-          {t("cart.totalPrice")}: Tk {cart.reduce((total, product) => total + product.price, 0)}
-        </h3>
-      </div>
+        {/* Floating Cart Button for Mobile */}
+        <button
+          className="fixed bottom-4 right-4 p-4 bg-blue-500 text-white rounded-full shadow-lg lg:hidden"
+          onClick={() => setIsModalOpen(true)}
+        >
+          <i className="fas fa-shopping-cart"></i>
+          <span className="ml-2">{cart.length}</span>
+        </button>
 
-      {/* Modal for Add to Cart */}
-      {isModalOpen && (
-        <div className="fixed inset-0 bg-gray-700 bg-opacity-50 flex justify-center items-center">
-          <div className="bg-white p-6 rounded-md shadow-lg">
-            <h3 className="text-lg font-semibold">
-              {t("cart.addedToCart", { product: t(selectedProduct.name) })}
-            </h3>
-            <button
-              onClick={closeModal}
-              className="mt-4 p-2 bg-blue-500 text-white rounded-md"
+        {/* Cart Modal */}
+        <AnimatePresence>
+          {isModalOpen && (
+            <motion.div
+              className="fixed inset-0 bg-gray-700 bg-opacity-50 flex justify-center items-center"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
             >
-              {t("translation.close")}
-            </button>
-          </div>
-        </div>
-      )}
+              <motion.div
+                className="bg-white p-6 rounded-md shadow-lg w-11/12 sm:w-3/4 md:w-1/2"
+                initial={{ y: -20 }}
+                animate={{ y: 0 }}
+                exit={{ y: -20 }}
+              >
+                <h3 className="text-lg font-semibold">{t("cart.cartTitle")}</h3>
+                <ul className="mt-4">
+                  {cart.map((product, index) => (
+                    <li key={index} className="text-lg text-gray-700">
+                      {t(product.name)} - Tk {product.price}
+                    </li>
+                  ))}
+                </ul>
+                <h3 className="mt-4 font-semibold">
+                  {t("cart.totalPrice")}: Tk {cart.reduce((total, product) => total + product.price, 0)}
+                </h3>
+                <button
+                  onClick={closeModal}
+                  className="mt-4 p-2 bg-blue-500 text-white rounded-md"
+                >
+                  {t("translation.close")}
+                </button>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+      <Footer />
     </>
   );
 };
