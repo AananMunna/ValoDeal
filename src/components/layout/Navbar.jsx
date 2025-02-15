@@ -102,7 +102,7 @@ const Navbar = () => {
         {/* Main Navbar */}
         <div className="container mx-auto flex justify-between items-center py-4 px-1">
           {/* Logo */}
-          <Link to="/" className="text-3xl font-extrabold">
+          <Link to="/" className="text-3xl font-extrabold hidden lg:block ">
             <img src={logo} className="w-24 h-8 md:w-32" alt="Logo" />
           </Link>
 
@@ -152,85 +152,89 @@ const Navbar = () => {
           </div>
 
           {/* User Actions */}
-          <div className="flex items-center space-x-2 md:space-x-6">
-            {/* Mobile Search Icon */}
-            <button
-              onClick={toggleSearchBar}
-              className="lg:hidden text-2xl text-black hover:text-[#008ecc] transition-all duration-300 p-2 rounded-full hover:bg-gray-100 active:scale-95"
-              aria-label="Toggle Search Bar"
-            >
-              <i className="bi bi-search"></i>
-            </button>
+          <div className="flex items-center justify-between lg:justify-normal w-full mx-auto lg:mx-0 lg:w-auto space-x-3 md:space-x-6 bg-white/90 backdrop-blur-lg p-2 lg:p-0 rounded-full shadow-lg absolute lg:relative top-1 left-0 right-0">
+          <Link to="/" className="text-3xl font-extrabold lg:hidden">
+            <img src={logo} className=" h-7" alt="Logo" />
+          </Link>
+  {/* Mobile Search Icon */}
+  <button
+    onClick={toggleSearchBar}
+    className="lg:hidden p-3 rounded-full bg-white shadow-sm transition-all duration-300 hover:scale-110 hover:shadow-md active:scale-90"
+    aria-label="Toggle Search Bar"
+  >
+    <i className="bi bi-search text-2xl text-gray-900"></i>
+  </button>
 
-            {/* User Icon */}
-            <button
-              onClick={toggleSignInModal}
-              className="text-2xl text-gray-800 hover:text-[#008ecc] transition-all duration-300 p-2 rounded-full hover:bg-gray-100 active:scale-95"
-              aria-label="User Account"
-            >
-              <i className="bi bi-person"></i>
-            </button>
+  {/* User Icon */}
+  <button
+    onClick={toggleSignInModal}
+    className="p-3 rounded-full bg-white shadow-sm transition-all duration-300 hover:scale-110 hover:shadow-md active:scale-90"
+    aria-label="User Account"
+  >
+    <i className="bi bi-person text-2xl text-gray-900"></i>
+  </button>
 
-            {/* Cart Icon */}
-            <Link to="/cart">
-              <button className="relative p-2 group transition-all duration-300 active:scale-95">
-                <i className="bi bi-cart text-2xl text-gray-800 group-hover:text-[#008ecc] transition-transform duration-300 transform group-hover:scale-110 group-hover:rotate-12"></i>
-                {cart.length > 0 && (
-                  <span className="absolute top-0 right-0 bg-[#008ecc] text-white text-xs rounded-full px-1.5 py-0.5 transform transition-all duration-500 ease-in-out group-hover:scale-110 group-hover:animate-pulse">
-                    {cart.length}
-                  </span>
-                )}
-              </button>
-            </Link>
+  {/* Cart Icon */}
+  <Link to="/cart">
+    <button className="relative p-3 rounded-full bg-white shadow-sm transition-all duration-300 hover:scale-110 hover:shadow-md active:scale-90">
+      <i className="bi bi-cart text-2xl text-gray-900 transition-transform duration-300 transform group-hover:scale-110 group-hover:rotate-12"></i>
+      {cart.length > 0 && (
+        <span className="absolute -top-1.5 -right-1.5 bg-red-500 text-white text-xs rounded-full px-1.5 py-0.5 transition-all duration-500 ease-in-out group-hover:scale-110 group-hover:animate-pulse">
+          {cart.length}
+        </span>
+      )}
+    </button>
+  </Link>
 
-            {/* Mobile Menu Button */}
-            <button
-              onClick={toggleMenu}
-              className="lg:hidden text-3xl text-gray-800 hover:text-[#008ecc] transition-transform duration-300 transform hover:rotate-90"
-            >
-              <i className="bi bi-list"></i>
-            </button>
+  {/* Mobile Menu Button */}
+  <button
+    onClick={toggleMenu}
+    className="lg:hidden p-3 rounded-full bg-white shadow-sm transition-transform duration-300 transform hover:scale-110 hover:rotate-90 active:scale-90"
+  >
+    <i className="bi bi-list text-2xl text-gray-900"></i>
+  </button>
 
-            {/* Language Dropdown */}
-            <div className="relative inline-block text-left">
-              <button
-                onClick={toggleDropdown}
-                className="flex items-center justify-center space-x-2 text-xs md:text-sm px-2 py-1 md:w-28 md:h-10 bg-white border border-gray-300 text-gray-700 hover:text-black hover:bg-gray-50 rounded-lg transition-all duration-300 transform hover:-translate-y-1 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#008ecc] focus:ring-opacity-50 active:scale-95 flex-col lg:flex-row text-center"
-              >
-                <span>{selectedLanguage}</span>
-                <i className="bi bi-chevron-down text-xs"></i>
-              </button>
+  {/* Language Dropdown */}
+  <div className="relative">
+    <button
+      onClick={toggleDropdown}
+      className="flex items-center justify-center space-x-2 p-3 rounded-full bg-white shadow-sm text-xs md:text-sm transition-all duration-300 hover:scale-110 hover:shadow-md active:scale-90"
+    >
+      <span>{selectedLanguage}</span>
+      <i className="bi bi-chevron-down text-xs"></i>
+    </button>
 
-              {isOpen && (
-                <ul className="absolute right-0 mt-2 w-32 py-2 bg-white shadow-lg rounded-lg border border-gray-300 transform transition-all duration-300 ease-in-out">
-                  <li>
-                    <a
-                      onClick={() => changeLanguageF("English")}
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer rounded-lg transition-all duration-300 transform hover:-translate-y-1 hover:scale-105 focus:outline-none active:scale-95"
-                    >
-                      English
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      onClick={() => changeLanguageF("বাংলা")}
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer rounded-lg transition-all duration-300 transform hover:-translate-y-1 hover:scale-105 focus:outline-none active:scale-95"
-                    >
-                      বাংলা
-                    </a>
-                  </li>
-                </ul>
-              )}
-            </div>
+    {isOpen && (
+      <ul className="absolute right-0 mt-2 w-32 py-2 bg-white shadow-xl rounded-lg border border-gray-200 transition-all duration-300 ease-in-out">
+        <li>
+          <a
+            onClick={() => changeLanguageF("English")}
+            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-lg transition-all duration-300 transform hover:scale-105 active:scale-95"
+          >
+            English
+          </a>
+        </li>
+        <li>
+          <a
+            onClick={() => changeLanguageF("বাংলা")}
+            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-lg transition-all duration-300 transform hover:scale-105 active:scale-95"
+          >
+            বাংলা
+          </a>
+        </li>
+      </ul>
+    )}
+  </div>
 
-            {/* Sign In Button (Desktop) */}
-            <button
-              onClick={toggleSignInModal}
-              className="hidden md:flex items-center justify-center bg-[#008ecc] text-white px-6 py-2 rounded-lg transition-all duration-300 transform hover:-translate-y-1 hover:scale-105 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-[#008ecc] focus:ring-opacity-50 active:scale-95"
-            >
-              {t("header.signIn")}
-            </button>
-          </div>
+  {/* Sign In Button (Desktop) */}
+  <button
+    onClick={toggleSignInModal}
+    className="hidden md:flex items-center justify-center bg-[#008ecc] text-white px-6 py-2 rounded-full transition-all duration-300 hover:scale-110 hover:shadow-lg active:scale-95"
+  >
+    {t("header.signIn")}
+  </button>
+</div>
+
         </div>
 
         {/* Mobile Search Bar */}
