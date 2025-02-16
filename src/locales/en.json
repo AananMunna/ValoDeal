@@ -82,5 +82,23 @@
     "cart": "Cart",
     "total": "Total",
     "close": "Close"
-  }
+  },
+
+  "popup": {
+    "title": "Provide your information to place an order with Cash on Delivery",
+    "name": "Your Name",
+    "phone": "Phone Number",
+    "address": "Address",
+    "shippingMethod": "Shipping Method",
+    "insideDhaka": "Inside Dhaka City",
+    "outSideDhaka": "Outside Dhaka City",
+    "subTotal": "Subtotal",
+    "deliveryCharge": "Delivery Charge",
+    "total": "Total",
+    "note": "Order Note",
+    "confirmOrder": "Click to confirm your order",
+    "orderConfirmed": "Your order has been confirmed!",
+    "shippingCost": "Shipping Cost",
+    "subtotal": "Subtotal"
+}
 }
