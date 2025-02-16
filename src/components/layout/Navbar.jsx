@@ -152,7 +152,7 @@ const Navbar = () => {
           </div>
 
           {/* User Actions */}
-          <div className="flex items-center justify-between lg:justify-normal w-full mx-auto lg:mx-0 lg:w-auto space-x-3 md:space-x-6 bg-white/90 backdrop-blur-lg p-2 lg:p-0 rounded-full shadow-lg fixed lg:relative bottom-1 left-0 right-0 border lg:border-none">
+          <div className="flex items-center justify-between lg:justify-normal w-full mx-auto lg:mx-0 lg:w-auto space-x-3 md:space-x-6 bg-white/90 backdrop-blur-lg p-4 lg:p-0 rounded-full shadow-lg fixed lg:relative bottom-1 left-0 right-0 border lg:border-none">
           <Link to="/" className="text-3xl font-extrabold lg:hidden">
             <img src={logo} className=" h-7" alt="Logo" />
           </Link>
