@@ -1,11 +1,17 @@
-import React from 'react';
-import { useParams, useLocation } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
-import Navbar from '../layout/Navbar';
-import Footer from '../layout/Footer';
-import { motion } from 'framer-motion';
+import React, { useState } from "react";
+import { useParams, useLocation } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import Navbar from "../layout/Navbar";
+import Footer from "../layout/Footer";
+import { motion } from "framer-motion";
+import { useCart } from "../../context/CartContext";
+import BuyNowPopup from "./BuyNowPopup"; // Import the popup component
 
 const ProductDetails = () => {
+  const { addToCart } = useCart();
+  const [showPopup, setShowPopup] = useState(false);
+  const [isBuyNowPopupOpen, setIsBuyNowPopupOpen] = useState(false); // For Buy Now Popup
+
   const { id } = useParams();
   const location = useLocation();
   const { product } = location.state; // Destructure the product from location.state
@@ -16,6 +22,16 @@ const ProductDetails = () => {
   if (!product) {
     return <div>Product not found</div>;
   }
+
+  const handleAddToCart = (product) => {
+    addToCart(product);
+    setShowPopup(true);
+    setTimeout(() => setShowPopup(false), 2000); // Hide popup after 2 seconds
+  };
+
+  const handleBuyNow = () => {
+    setIsBuyNowPopupOpen(true);
+  };
 
   return (
     <>
@@ -30,9 +46,9 @@ const ProductDetails = () => {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, ease: "easeInOut" }}
             whileHover={{
-              scale: 1.03, // Slightly scale up the image
-              boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)", // Add a soft shadow
-              transition: { duration: 0.3, ease: "easeInOut" }, // Smooth transition
+              scale: 1.03,
+              boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
+              transition: { duration: 0.3, ease: "easeInOut" },
             }}
           >
             <img
@@ -49,43 +65,52 @@ const ProductDetails = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: "easeInOut" }}
           >
-            {/* Product Title */}
             <h1 className="text-3xl font-bold text-gray-900">
               {product.name[currentLang]}
             </h1>
 
-            {/* Product Price */}
             <p className="text-2xl font-semibold text-gray-800">
               {product.price[currentLang]}
             </p>
 
-            {/* Product Description */}
-            <p className="text-gray-700">
-              {product.desc[currentLang]} {/* Add translation for description */}
-            </p>
+            <p className="text-gray-700">{product.desc[currentLang]}</p>
 
             {/* Call-to-Action Buttons */}
-            <div className="flex flex-col space-y-4">
+            <div className="flex flex-col">
               <motion.button
                 className="w-full bg-[#008ecc] text-white py-3 rounded-lg hover:bg-[#006fab] transition-all duration-300"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
+                onClick={() => handleAddToCart(product)}
               >
-                {t('cart.addToCart')}
+                {t("cart.addToCart")}
               </motion.button>
-              <motion.button
-                className="w-full bg-[#ff9900] text-white py-3 rounded-lg hover:bg-[#e68a00] transition-all duration-300"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                {t('cart.buy')}
-              </motion.button>
-            </div>
 
-            {/* Additional Product Details */}
+              {/* Popup Message */}
+              {showPopup && (
+                <motion.div
+                  className="fixed bottom-16 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-6 py-3 rounded-full text-center shadow-md z-50 text-xs"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  {t("cart.addedToCart")}
+                </motion.div>
+              )}
+                
+                {/* Buy Now Popup */}
+      <BuyNowPopup
+        isOpen={isBuyNowPopupOpen}
+        onClose={() => setIsBuyNowPopupOpen(false)}
+        product={product}
+      />
+            </div>
           </motion.div>
         </div>
       </div>
+
+      
+
       <Footer />
     </>
   );
