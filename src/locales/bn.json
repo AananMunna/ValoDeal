@@ -100,5 +100,16 @@
     "orderConfirmed": "আপনার অর্ডার কনফার্ম হয়েছে!",
     "shippingCost": "শিপিং খরচ",
     "subtotal": "সাব টোটাল"
+  },
+
+
+
+
+  "hero": {
+    "best_grocery": "সেরা অফার",
+    "best_grocery_desc": " কেনাকাটা করুন!",
+    "daily_essentials": "প্রয়োজনীয় জিনিসপত্র",
+    "daily_essentials_desc": "সেরা দামে মানসম্পন্ন পণ্য!",
+    "shop_now": "কিনুন এখনই"
   }
 }

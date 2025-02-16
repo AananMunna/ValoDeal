@@ -100,5 +100,17 @@
     "orderConfirmed": "Your order has been confirmed!",
     "shippingCost": "Shipping Cost",
     "subtotal": "Subtotal"
-}
+},
+
+
+
+  "hero": {
+    "best_grocery": "Best Grocery Deals",
+    "best_grocery_desc": "Shop fresh & save big!",
+    "daily_essentials": "Daily Essentials",
+    "daily_essentials_desc": "Quality products at unbeatable prices!",
+    "shop_now": "Shop Now"
+  }
+
+
 }
