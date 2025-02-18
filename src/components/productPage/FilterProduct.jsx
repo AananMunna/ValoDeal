@@ -82,7 +82,7 @@ const FilterProduct = () => {
         {/* Mobile Filters Toggle Button */}
         <button
           onClick={toggleFilters}
-          className="lg:hidden w-full p-3 bg-blue-500 text-white rounded-md mb-4"
+          className="lg:hidden w-full p-3 bg-blue-500 text-white rounded-md mb-4 shadow-lg hover:bg-blue-600 transition-all"
         >
           {isFiltersVisible ? t("filters.hideFilters") : t("filters.showFilters")}
         </button>
@@ -179,7 +179,7 @@ const FilterProduct = () => {
                   </Link>
                   <button
                     onClick={() => addToCart(product)}
-                    className="w-full p-3 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+                    className="w-full p-3 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-all"
                   >
                     {t("cart.addToCart")}
                   </button>
@@ -191,7 +191,7 @@ const FilterProduct = () => {
 
         {/* Floating Cart Button for Mobile */}
         <button
-          className="fixed bottom-4 right-4 p-4 bg-blue-500 text-white rounded-full shadow-lg lg:hidden"
+          className="fixed bottom-4 right-4 p-4 bg-blue-500 text-white rounded-full shadow-lg lg:hidden hover:bg-blue-600 transition-all"
           onClick={() => setIsModalOpen(true)}
         >
           <i className="fas fa-shopping-cart"></i>
@@ -226,7 +226,7 @@ const FilterProduct = () => {
                 </h3>
                 <button
                   onClick={closeModal}
-                  className="mt-4 p-2 bg-blue-500 text-white rounded-md"
+                  className="mt-4 p-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-all"
                 >
                   {t("translation.close")}
                 </button>

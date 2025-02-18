@@ -31,7 +31,13 @@ const ProductCard = ({ product }) => {
           alt={product.name[currentLang]}
           className="w-full h-48 sm:h-56 object-cover rounded-lg mb-4"
           whileHover={{ scale: 1.1 }} // Zoom effect on hover
-          transition={{ duration: 0.3 }}
+          animate={{
+            y: [0, 10, 0], // Sliding effect (move 10px to the right and back)
+          }}
+          transition={{
+            y: { repeat: Infinity, duration: 5, ease: "easeInOut" }, // Apply the sliding effect over time
+            duration: 0.3,
+          }}
         />
 
         {/* Product Name */}

@@ -151,35 +151,37 @@ const Navbar = () => {
             )}
           </div>
 
-          {/* User Actions */}
-          <div className="flex items-center justify-between lg:justify-normal w-full mx-auto lg:mx-0 lg:w-auto space-x-3 md:space-x-6 bg-white/90 backdrop-blur-lg p-4 lg:p-0 rounded-full shadow-2xl fixed lg:relative bottom-1 left-0 right-0 border  border-[#209cd2] lg:border-none">
-          <Link to="/" className="text-3xl font-extrabold lg:hidden">
-            <img src={logo} className=" h-7" alt="Logo" />
-          </Link>
+{/* User Actions */}
+<div className="flex items-center justify-between lg:justify-normal w-full mx-auto lg:mx-0 lg:w-auto space-x-3 md:space-x-6 bg-white/90 backdrop-blur-lg p-4 lg:p-0 rounded-full shadow-2xl fixed lg:relative bottom-1 left-0 right-0 border border-[#209cd2] lg:border-none">
+  {/* Mobile Logo */}
+  <Link to="/" className="text-3xl font-extrabold lg:hidden">
+    <img src={logo} className="h-7" alt="Logo" />
+  </Link>
+
   {/* Mobile Search Icon */}
   <button
     onClick={toggleSearchBar}
-    className="lg:hidden p-3 rounded-full bg-white shadow-md transition-all duration-300 hover:scale-110 hover:shadow-md active:scale-90"
+    className="lg:hidden p-3 rounded-full bg-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 active:scale-95"
     aria-label="Toggle Search Bar"
   >
-    <i className="bi bi-search text-2xl text-gray-900"></i>
+    <i className="bi bi-search text-2xl text-gray-900 hover:text-[#008ecc] transition-colors duration-300"></i>
   </button>
 
   {/* User Icon */}
   <button
     onClick={toggleSignInModal}
-    className="p-3 rounded-full bg-white shadow-md transition-all duration-300 hover:scale-110 hover:shadow-md active:scale-90"
+    className="p-3 rounded-full bg-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 active:scale-95"
     aria-label="User Account"
   >
-    <i className="bi bi-person text-2xl text-gray-900"></i>
+    <i className="bi bi-person text-2xl text-gray-900 hover:text-[#008ecc] transition-colors duration-300"></i>
   </button>
 
   {/* Cart Icon */}
   <Link to="/cart">
-    <button className="relative p-3 rounded-full bg-white shadow-md transition-all duration-300 hover:scale-110 hover:shadow-md active:scale-90">
-      <i className="bi bi-cart text-2xl text-gray-900 transition-transform duration-300 transform group-hover:scale-110 group-hover:rotate-12"></i>
+    <button className="relative p-3 rounded-full bg-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 active:scale-95">
+      <i className="bi bi-cart text-2xl text-gray-900 hover:text-[#008ecc] transition-colors duration-300"></i>
       {cart.length > 0 && (
-        <span className="absolute -top-1.5 -right-1.5 bg-red-500 text-white text-xs rounded-full px-1.5 py-0.5 transition-all duration-500 ease-in-out group-hover:scale-110 group-hover:animate-pulse">
+        <span className="absolute -top-1.5 -right-1.5 bg-red-500 text-white text-xs rounded-full px-1.5 py-0.5 transition-all duration-300 hover:scale-110 hover:animate-pulse">
           {cart.length}
         </span>
       )}
@@ -189,27 +191,27 @@ const Navbar = () => {
   {/* Mobile Menu Button */}
   <button
     onClick={toggleMenu}
-    className="lg:hidden p-3 rounded-full bg-white shadow-md transition-transform duration-300 transform hover:scale-110 hover:rotate-90 active:scale-90"
+    className="lg:hidden p-3 rounded-full bg-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 active:scale-95"
   >
-    <i className="bi bi-list text-2xl text-gray-900"></i>
+    <i className="bi bi-list text-2xl text-gray-900 hover:text-[#008ecc] transition-colors duration-300"></i>
   </button>
 
   {/* Language Dropdown */}
   <div className="relative">
     <button
       onClick={toggleDropdown}
-      className="flex flex-col lg:flex-row items-center justify-center space-x-2 p-3 rounded-full bg-white shadow-md text-[8px] md:text-sm transition-all duration-300 hover:scale-110 hover:shadow-md active:scale-90"
+      className="flex flex-col lg:flex-row items-center justify-center space-x-2 p-3 rounded-full bg-white shadow-lg hover:shadow-xl text-[8px] md:text-sm transition-all duration-300 hover:scale-110 active:scale-95"
     >
-      <span>{selectedLanguage}</span>
-      <i className="bi bi-chevron-down text-xs"></i>
+      <span className="text-gray-900 hover:text-[#008ecc] transition-colors duration-300">{selectedLanguage}</span>
+      <i className="bi bi-chevron-down text-xs text-gray-900 hover:text-[#008ecc] transition-colors duration-300"></i>
     </button>
 
     {isOpen && (
-      <ul className="absolute right-0 bottom-16 lg:-bottom-24 mt-2 w-32 py-2 bg-white shadow-xl rounded-lg border border-gray-200 transition-all duration-300 ease-in-out">
+      <ul className="absolute right-0 bottom-16 lg:-bottom-24 mt-2 w-32 py-2 bg-white shadow-2xl rounded-lg border border-gray-200 transition-all duration-300 ease-in-out">
         <li>
           <a
             onClick={() => changeLanguageF("English")}
-            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-lg transition-all duration-300 transform hover:scale-105 active:scale-95"
+            className="block px-4 py-2 text-sm text-gray-700 hover:bg-[#008ecc] hover:text-white rounded-lg transition-all duration-300 hover:scale-105 active:scale-95"
           >
             English
           </a>
@@ -217,7 +219,7 @@ const Navbar = () => {
         <li>
           <a
             onClick={() => changeLanguageF("বাংলা")}
-            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-lg transition-all duration-300 transform hover:scale-105 active:scale-95"
+            className="block px-4 py-2 text-sm text-gray-700 hover:bg-[#008ecc] hover:text-white rounded-lg transition-all duration-300 hover:scale-105 active:scale-95"
           >
             বাংলা
           </a>
@@ -229,7 +231,7 @@ const Navbar = () => {
   {/* Sign In Button (Desktop) */}
   <button
     onClick={toggleSignInModal}
-    className="hidden md:flex items-center justify-center bg-[#008ecc] text-white px-6 py-2 rounded-full transition-all duration-300 hover:scale-110 hover:shadow-lg active:scale-95"
+    className="hidden md:flex items-center justify-center bg-gradient-to-r from-[#008ecc] to-[#006699] text-white px-6 py-2 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 active:scale-95"
   >
     {t("header.signIn")}
   </button>
